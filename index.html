@@ -826,7 +826,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.5;}
     <div id="sleep-log-history"></div>
   </div>
 
-  <div class="card"><div class="card-title">Sleep Schedule</div><table class="t"><tr><th>Time</th><th>Action</th></tr><tr><td style="font-family:'Courier New',monospace;font-weight:500">11:30 PM</td><td>Screens off</td></tr><tr><td style="font-family:'Courier New',monospace;font-weight:500">11:45 PM</td><td>Magnesium bisglycinate 400mg</td></tr><tr><td style="font-family:'Courier New',monospace;font-weight:500">12:00 AM</td><td>Lights out. Room dark, 18-20°C</td></tr><tr><td style="font-family:'Courier New',monospace;font-weight:500">8:00 AM</td><td>Wake. Natural light 10-15 min</td></tr></table></div>
+  <div class="card"><div class="card-title">Sleep Schedule</div><table class="t"><tr><th>Time</th><th>Action</th></tr><tr><td style="font-family:'Courier New',monospace;font-weight:500">9:00 PM</td><td>No large fluids — prevents night waking</td></tr><tr><td style="font-family:'Courier New',monospace;font-weight:500">11:30 PM</td><td>Screens off</td></tr><tr><td style="font-family:'Courier New',monospace;font-weight:500">11:45 PM</td><td>Magnesium bisglycinate 400mg</td></tr><tr><td style="font-family:'Courier New',monospace;font-weight:500">12:00 AM</td><td>Lights out. Room dark, 18-20°C</td></tr><tr><td style="font-family:'Courier New',monospace;font-weight:500">8:00 AM</td><td>Wake. Natural light 10-15 min</td></tr></table></div>
   <div class="card"><div class="card-title">Effexor Timing</div><table class="t"><tr><th>Rule</th><th>Detail</th></tr><tr><td>With breakfast</td><td>Morning with food. Never fasted.</td></tr><tr><td>Never after 2 PM</td><td>Stimulant properties disrupt sleep if taken late.</td></tr><tr><td>Same time daily</td><td>Consistent timing maintains stable blood levels.</td></tr><tr><td>REM suppression</td><td>Effexor XR reduces REM sleep. If you get 8h but wake unrefreshed consistently, raise this with your prescriber — it is a known side effect, not a sleep protocol failure.</td></tr></table></div>
   <div class="card"><div class="card-title">Rules</div><table class="t"><tr><th>Rule</th></tr><tr><td>No caffeine after 1 PM</td></tr><tr><td>No alcohol</td></tr><tr><td>No training within 3h of bed</td></tr><tr><td>Same wake time 7 days/week</td></tr><tr><td>Room 18-20°C, complete darkness</td></tr></table></div>
 </div>
@@ -1289,7 +1289,7 @@ const SUPPS=[
       {id:'k2d3',name:'K2 + D3',dose:'120mcg K2 / 1,000 IU D3',time:'With breakfast (fat present)',warn:null},
       {id:'zinc',name:'Zinc Picolinate',dose:'15-20mg (dietary zinc covers the rest)',time:'With breakfast — away from iron-rich meals',warn:'⚠️ Zinc competes with iron. Never take at lunch or dinner (beef, turkey, spinach). Breakfast only.'},
       {id:'biotin',name:'Biotin',dose:'5,000mcg',time:'With breakfast',warn:'⚠️ Stop 48-72h before any bloodwork.'},
-      {id:'lmnt',name:'Electrolytes',dose:'1 packet in 500ml water',time:'Every morning before breakfast',warn:'⚠️ On injection Fridays drink before food to help manage nausea. Target 4.5L every day including rest and injection days.'},
+      {id:'lmnt',name:'Electrolytes',dose:'1 packet in 500ml water',time:'Every morning before breakfast',warn:'⚠️ On injection Fridays drink before food to help manage nausea. Target 4.5L every day including rest and injection days. No large fluids after 9 PM — finish your water by 9 PM to protect sleep quality.'},
     ]
   },
   {
@@ -1321,7 +1321,7 @@ const SUPPS=[
     section:'💊 Medications',
     why:'Mounjaro Friday evening after dinner — side effects peak Sat/Sun when you can rest and are not training.',
     items:[
-      {id:'mounjaro',name:'Mounjaro',dose:'As prescribed by obesity clinic',time:'Friday evening after dinner',warn:null},
+      {id:'mounjaro',name:'Mounjaro',dose:'As prescribed by obesity clinic',time:'Friday evening after dinner',warn:'⚠️ Injection day rules: eat slowly, avoid carbonation, eat warm not cold food. On dose increase weeks simplify to your 3 easiest meals until body adjusts.'},
     ]
   },
   {
@@ -1905,6 +1905,24 @@ function renderMilestones(){
     {name:'Phase 4: Final Lean Out',weeks:'Weeks 29-52',start:29,end:52},
     {name:'Maintenance',weeks:'Month 14-18+',start:53,end:999},
   ];
+  // Key milestones block
+  const keyMilestones=[
+    {label:'🩸 Bloodwork #1 — ALT + Trig + Testosterone recheck',date:'Late June 2026',week:2},
+    {label:'📉 Calorie drop at 112.5 kg → reduce to ~2,250 kcal/day',date:'~September 2026',week:12},
+    {label:'🩸 Bloodwork #2 — Full panel (Lipids, ALT, T, Thyroid)',date:'September 2026',week:14},
+    {label:'📉 Calorie drop at 102.5 kg → reduce to ~2,100 kcal/day',date:'~December 2026',week:26},
+    {label:'🩸 Bloodwork #3 — Full panel',date:'December 2026',week:27},
+    {label:'🏁 Goal weight 95 kg reached',date:'~December 2027',week:78},
+  ];
+  const kmEl=document.getElementById('ms-roadmap');
+  if(kmEl){
+    const kmHTML=keyMilestones.map(m=>{
+      const done=week>m.week;const cur=week===m.week;
+      const pill=done?'<span class="pill p-green">Done ✓</span>':cur?'<span class="pill p-blue">Now</span>':'<span class="pill p-gray">'+m.date+'</span>';
+      return `<div class="ms" style="margin-top:4px"><div class="ms-dot ${done?'done':cur?'cur':''}"></div><div class="ms-text"><div style="font-weight:600;font-size:12px">${m.label}</div></div>${pill}</div>`;
+    }).join('');
+    kmEl.innerHTML+='<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:.5rem">KEY MILESTONES</div>'+kmHTML+'</div>';
+  }
   const rm=document.getElementById('ms-roadmap');if(!rm)return;
   rm.innerHTML=phases.map(p=>{
     const done=week>p.end;const cur=week>=p.start&&week<=p.end;
