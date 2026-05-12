@@ -1022,13 +1022,14 @@ let ghToken='';let ghGistId='';
 const WORKOUT={
   p1:{
     label:'Phase 1 — Foundation (Weeks 1-8)',
-    note:'Master movement patterns with DBs before barbell. LISS cardio only. Weeks 1-2: 50% weight, 2 sets only. Learn each exercise before loading it.',
+    note:'Master movement patterns. DBs, cables and machines only — no barbell yet. LISS cardio only. Weeks 1-2: 50% weight, 2 sets only. Learn each exercise before loading it.',
     prog:'Hit top of rep range clean across ALL sets → add 2.5 kg. Never add weight if form breaks. Deload Week 8: 40% weight, 3 sets, full ROM only.',
     days:[
-      {day:'Monday',focus:'Upper Chest + Shoulders + Serratus',tag:'push-a',exercises:[
-        {n:'Incline DB Press (30-35°)',rx:'4 × 10-12',t:'3-1-1',r:'90s',note:'DB in Phase 1 — full ROM and wrist rotation at top for peak upper pec contraction. 30-35° ONLY. 45° shifts load to front delt. Deep stretch at bottom, slight supination at top.'},
+      {day:'Monday',focus:'Upper + Mid Chest + Shoulders + Serratus',tag:'push-a',exercises:[
+        {n:'Incline DB Press (30-35°)',rx:'4 × 10-12',t:'3-1-1',r:'90s',note:'Upper pec priority. 30-35° ONLY — 45° shifts load to front delt. Full ROM, slight supination at top for peak upper pec contraction. This is the primary mass builder for the upper chest shelf.'},
+        {n:'Flat DB Press',rx:'4 × 10-12',t:'3-1-1',r:'90s',note:'Mid-pec development. Flat angle recruits the sternal (lower-mid) fibres that incline misses. Without this, the chest looks underdeveloped in the middle. Full ROM — touch outer chest at bottom, full lockout at top.'},
         {n:'Low-to-High Cable Crossover',rx:'4 × 15',t:'2-0-2',r:'60s',note:'Hands cross PAST MIDLINE every rep. Hold 1s at the crossed position. This is the inner cleavage exercise. Pec primary function is adduction AND internal rotation — crossing midline engages both. Non-negotiable every push session.'},
-        {n:'Incline DB Fly',rx:'3 × 12',t:'4-0-1',r:'60s',note:'4-count eccentric. Deep stretch at bottom under control. Never bounce. Stretched position under load = highest hypertrophy stimulus.'},
+        {n:'Incline DB Fly',rx:'3 × 12',t:'4-0-1',r:'60s',note:'4-count eccentric. Deep stretch at bottom under control. Never bounce. Stretched position under load = highest hypertrophy stimulus for upper pec.'},
         {n:'Seated DB Overhead Press',rx:'4 × 10',t:'2-1-1',r:'90s',note:'DB over bar — natural joint path, independent arms, greater ROM. Seated removes leg drive. Full range — upper arms near parallel at bottom.'},
         {n:'Cable Lateral Raise',rx:'4 × 15-20',t:'2-0-1',r:'45s',note:'Cable beats dumbbell — maintains tension at the bottom where the muscle is longest and hypertrophy stimulus is highest. Lead with elbow. Slight forward lean. Thumb slightly down at top.'},
         {n:'Serratus Punch (cable, high-to-low)',rx:'3 × 15 each',t:'2-0-2',r:'45s',note:'Face cable set high. Punch forward-down with FULL scapular protraction at end range. Creates the finger-like ribcage muscles visible on elite physiques. Completely absent from most plans.'},
@@ -1038,48 +1039,52 @@ const WORKOUT={
         {n:'Assisted Pull-Up or Pull-Up',rx:'4 × 6-10',t:'3-1-1',r:'90s',note:'Highest lat activation of any exercise. Full dead hang at bottom — never skip the stretch. Use band assist if needed. Goal: unassisted bodyweight pull-up by end of Phase 1.'},
         {n:'Wide Grip Lat Pulldown',rx:'4 × 10-12',t:'3-1-1',r:'75s',note:'Lat width. Pull to upper chest. Initiate with lats — depress and retract scapulae FIRST, then pull arms. Do not lean back excessively.'},
         {n:'Chest-Supported DB Row',rx:'4 × 12 each',t:'3-1-1',r:'75s',note:'DB row over barbell for hypertrophy. Chest on incline bench removes lower back completely — pure lat and mid-back with no cheating. Drive elbow back and up. Full stretch at bottom.'},
-        {n:'Straight-Arm Pulldown (cable)',rx:'3 × 15',t:'2-0-2',r:'45s',note:'Best lat isolation. Arms straight, push bar from overhead to hips. Replicates the lat\'s primary function — shoulder extension — with zero bicep involvement.'},
+        {n:'Straight-Arm Pulldown (cable)',rx:'3 × 15',t:'2-0-2',r:'45s',note:'Best lat isolation. Arms straight, push bar from overhead to hips. Replicates the lat primary function — shoulder extension — with zero bicep involvement.'},
         {n:'Reverse Pec Deck',rx:'4 × 15-20',t:'2-0-2',r:'45s',note:'Machine over DB fly — constant tension, no cheating. Higher rear delt EMG than dumbbell. Lead with elbows, squeeze hard at full extension.'},
         {n:'Face Pull (rope)',rx:'3 × 20',t:'2-0-2',r:'45s',note:'Second face pull of the week. Rear delts need frequency — they are often the weakest link and directly impact both shoulder width and health.'},
+        {n:'Band Pull-Apart',rx:'3 × 25',t:'2-0-1',r:'30s',note:'Rear delt and external rotators. Arms straight, pull band apart to chest height. Weekly frequency for rear delts is the most underrated investment in shoulder health and width.'},
         {n:'Prone Y Raise',rx:'3 × 15',t:'2-1-2',r:'45s',note:'Lower trapezius isolation. Face-down on incline bench, arms form Y overhead, raise with scapular DEPRESSION (pull shoulder blades down, not up). Lower trap creates the V-shape at the back and athletic natural posture.'},
       ]},
-      {day:'Wednesday',focus:'Legs — Toning + Glutes',tag:'legs',exercises:[
-        {n:'Goblet Squat',rx:'4 × 15',t:'3-1-1',r:'75s',note:'Toning focus. Build the pattern before a bar. Deep squat, knees track toes, chest up.'},
-        {n:'Romanian Deadlift (DBs)',rx:'4 × 12',t:'3-0-1',r:'75s',note:'Hamstring and glute. Feel the hamstring stretch fully. Hinge at hip, weights track shins.'},
-        {n:'Leg Press',rx:'3 × 15',t:'2-1-1',r:'75s',note:'Toning load. Full ROM. Do not lock out knees.'},
-        {n:'Hip Thrust (bodyweight)',rx:'3 × 20',t:'2-2-1',r:'60s',note:'NEW — glute emphasis. Glute-ham tie-in is the athletic silhouette from behind. Drive through heels, squeeze hard at top for 2 full seconds. Progress to barbell in Phase 2.'},
+      {day:'Wednesday',focus:'Legs — Toning + Glutes + Hamstrings',tag:'legs',exercises:[
+        {n:'Goblet Squat',rx:'4 × 15',t:'3-1-1',r:'75s',note:'Toning focus. Build the pattern before a bar. Deep squat, knees track toes, chest up. Quad and glute development without barbell loading.'},
+        {n:'Romanian Deadlift (DBs)',rx:'4 × 12',t:'3-0-1',r:'75s',note:'Hamstring and glute stretch position. Feel the hamstring stretch fully. Hinge at hip, weights track shins down the legs.'},
+        {n:'Lying or Seated Leg Curl',rx:'4 × 12-15',t:'3-0-1',r:'60s',note:'Knee-flexion hamstring stimulus that RDL cannot replicate. RDL works hamstring in the STRETCHED position. Leg curl works it in the CONTRACTED position. Both are needed — skipping this leaves 50% of hamstring development on the table.'},
+        {n:'Leg Press',rx:'3 × 15',t:'2-1-1',r:'75s',note:'Toning load. Full ROM. Do not lock out knees. Quad sweep and sweep from outer thigh.'},
+        {n:'Hip Thrust (bodyweight)',rx:'3 × 20',t:'2-2-1',r:'60s',note:'Glute emphasis. Glute-ham tie-in is the athletic silhouette from behind. Drive through heels, squeeze hard at top for 2 full seconds. Progress to barbell in Phase 2.'},
         {n:'Walking Lunges',rx:'3 × 12 each',t:'2-0-1',r:'60s',note:'Glute activation and quad definition. Controlled step, knee stays over ankle.'},
-        {n:'Standing Calf Raise',rx:'4 × 20',t:'2-2-1',r:'45s',note:'Full range. Pause at bottom stretch and top peak.'},
-        {n:'Lying or Seated Leg Curl',rx:'3 × 15',t:'3-0-1',r:'60s',note:'Knee-flexion hamstring stimulus that RDL cannot replicate. RDL works the hamstring in the stretched position — leg curl works it in the contracted position. Both are needed for complete hamstring development.'},
-        {n:'Ab Rollout (kneeling)',rx:'3 × 10',t:'3-0-1',r:'60s',note:'NEW — highest core EMG and serratus activator. Full extension, abs braced, hips do not drop. Start kneeling. Progress to standing in Phase 2.'},
+        {n:'Standing Calf Raise',rx:'4 × 20',t:'2-2-1',r:'45s',note:'Full range. Pause at bottom stretch and top peak contraction.'},
+        {n:'Ab Rollout (kneeling)',rx:'3 × 10',t:'3-0-1',r:'60s',note:'Highest core EMG and serratus activator. Full extension, abs braced, hips do not drop. Start kneeling. Progress to standing in Phase 2.'},
       ]},
-      {day:'Thursday',focus:'Shoulders + Traps + Neck',tag:'push-b',exercises:[
+      {day:'Thursday',focus:'Shoulders + Traps + Triceps + Neck',tag:'push-b',exercises:[
         {n:'Seated DB Lateral Raise (with forward lean)',rx:'5 × 15',t:'2-0-1',r:'60s',note:'Slight forward lean positions humerus to perfectly align medial delt with movement arc. Thumb slightly down. Do not shrug. The single most important exercise for visual shoulder width.'},
-        {n:'Cable Lateral Raise',rx:'4 × 20',t:'2-0-1',r:'45s',note:'Second lateral raise — medial delts need volume. Cable for tension in stretched position.'},
+        {n:'Cable Lateral Raise',rx:'4 × 20',t:'2-0-1',r:'45s',note:'Second lateral raise — medial delts need volume. Cable for tension in stretched position that dumbbells cannot replicate.'},
         {n:'Arnold Press (seated)',rx:'4 × 10',t:'2-1-1',r:'90s',note:'All three delt heads through rotation. Superior to standard OHP for complete delt development at moderate Phase 1 loads.'},
         {n:'DB Shrug',rx:'4 × 15',t:'2-2-1',r:'60s',note:'Upper trap. 2-second hold at top. Full depression at bottom — do not bounce.'},
-        {n:'Overhead Tricep Extension (cable or EZ bar)',rx:'4 × 12',t:'3-0-1',r:'60s',note:'Priority move — long head only fully stretched overhead. Long head is largest portion of tricep and creates the horseshoe shape. Elbows in, full overhead stretch, full extension.'},
+        {n:'Overhead Tricep Extension (cable or EZ bar)',rx:'4 × 12',t:'3-0-1',r:'60s',note:'Priority move — long head only fully stretched overhead. Long head is the largest portion of the tricep and creates the horseshoe shape. Elbows in, full overhead stretch, full extension.'},
         {n:'Tricep Pushdown (rope)',rx:'3 × 15',t:'2-0-1',r:'45s',note:'Lateral and medial head. Spread rope at bottom for peak contraction.'},
-        {n:'Lateral Neck Flexion (plate)',rx:'3 × 15 each',t:'2-1-2',r:'45s',note:'NEW — neck development. At 6 foot 1 a developed neck transforms the entire upper body silhouette. Plate on side of head, slow lateral flexion. Start 2.5-5 kg only.'},
+        {n:'Cable Kickback',rx:'3 × 15 each',t:'2-0-1',r:'30s',note:'Lateral head isolation in the fully contracted position — the exercise that creates the outer tricep sweep visible from the side. Arm parallel to floor, extend fully and squeeze for 1s.'},
+        {n:'Lateral Neck Flexion (plate)',rx:'3 × 15 each',t:'2-1-2',r:'45s',note:'Neck development transforms the entire upper body silhouette at 186cm. Plate on side of head, slow lateral flexion. Start 2.5-5 kg only.'},
       ]},
-      {day:'Friday',focus:'Lats + Bicep Peak + Brachialis + Tricep',tag:'pull-b',note:'⚠️ High bicep volume day. If medial elbow soreness develops, drop Cross-Body Hammer or Standard Hammer — keep Incline Curl and Reverse Curl.',exercises:[
+      {day:'Friday',focus:'Lats + Bicep Peak + Brachialis + Arms',tag:'pull-b',note:'⚠️ High bicep volume day. If medial elbow soreness develops, drop Cross-Body Hammer or Standard Hammer — keep Incline Curl and Reverse Curl.',exercises:[
         {n:'Pull-Up (close grip) or Assisted',rx:'4 × 6-10',t:'3-1-1',r:'90s',note:'Close grip biases lower lat flare visible from the front. Second pull-up day — lat frequency drives the V-taper width.'},
         {n:'Single-Arm Cable Row',rx:'4 × 12 each',t:'3-1-1',r:'60s',note:'Reach fully forward at bottom for complete lat stretch. Drive elbow past the body. Cable allows full rotation and ROM not possible with barbell.'},
         {n:'Incline DB Curl',rx:'4 × 12',t:'4-0-1',r:'60s',note:'Best bicep peak exercise. Long head fully stretched when arm hangs behind the body on the incline. 4-count eccentric — stretch under load is the hypertrophy driver. Do not swing.'},
-        {n:'Cross-Body Hammer Curl',rx:'3 × 12 each',t:'2-0-1',r:'45s',note:'NEW — brachialis in a different angle. Curl across body toward opposite shoulder. Brachialis pushes the bicep up, making arms look thicker from all angles.'},
+        {n:'Cross-Body Hammer Curl',rx:'3 × 12 each',t:'2-0-1',r:'45s',note:'Brachialis in a different angle. Curl across body toward opposite shoulder. Brachialis pushes the bicep up, making arms look thicker from all angles.'},
         {n:'Hammer Curl (standard)',rx:'3 × 12',t:'2-0-1',r:'45s',note:'Brachialis and brachioradialis. Neutral grip throughout. Arm thickness, not just peak.'},
         {n:'Skull Crusher (EZ bar)',rx:'3 × 12',t:'3-0-1',r:'60s',note:'Long head tricep. EZ bar reduces wrist stress vs straight bar. Elbows point at ceiling throughout.'},
+        {n:'Reverse Curl (EZ bar)',rx:'3 × 12',t:'2-0-1',r:'45s',note:'Brachialis and brachioradialis via reverse grip. Builds lower arm density and fills the arm from every angle. Non-negotiable for complete arm development.'},
         {n:'Face Pull (rope)',rx:'3 × 20',t:'2-0-2',r:'45s',note:'Third face pull of the week. Rear delt frequency is the most underrated investment in the Greek god physique.'},
       ]},
       {day:'Saturday',focus:'Cardio + Core + Serratus',tag:'cardio',exercises:[
-        {n:'LISS Cardio (walk, cycle, or swim)',rx:'40-45 min',t:'—',r:'—',note:'Zone 2 only in Phase 1. 120-140 bpm. Can hold a conversation throughout. No HIIT yet.'},
+        {n:'LISS Cardio (walk, cycle, or swim)',rx:'40-45 min',t:'—',r:'—',note:'Zone 2 only in Phase 1. 120-140 bpm. Can hold a conversation throughout. No HIIT yet — joints are still adapting to training volume.'},
         {n:'Weighted Cable Crunch',rx:'4 × 20',t:'2-0-1',r:'45s',note:'Progressive overload on abs like any muscle. Round spine fully at bottom.'},
-        {n:'Hanging Knee Raise',rx:'3 × 15',t:'2-0-1',r:'45s',note:'Lower abs. Control the descent. Progress to straight leg raise.'},
+        {n:'Hanging Knee Raise',rx:'3 × 15',t:'2-0-1',r:'45s',note:'Lower abs. Control the descent. Progress to straight leg raise in Phase 2.'},
         {n:'Ab Rollout (kneeling)',rx:'3 × 10',t:'3-0-1',r:'60s',note:'Serratus and full core. Best dual-purpose exercise in the plan.'},
         {n:'Russian Twist',rx:'3 × 20',t:'2-0-1',r:'45s',note:'Obliques. Feet off floor. Full rotation each side.'},
+        {n:'Pallof Press',rx:'3 × 10 each',t:'2-1-1',r:'45s',note:'Anti-rotation core stability — the missing element in most core programs. Builds the lateral waist tightness that makes the V-taper dramatic.'},
       ]},
       {day:'Sunday',focus:'Active Recovery + Mobility',tag:'rest',exercises:[
-        {n:'Walk 30-45 min',rx:'Easy pace',t:'—',r:'—',note:'Non-negotiable.'},
+        {n:'Walk 30-45 min',rx:'Easy pace',t:'—',r:'—',note:'Non-negotiable. Keeps metabolism active on rest day.'},
         {n:'Full mobility routine',rx:'15-20 min',t:'—',r:'—',note:'See Warm-Up tab. Thoracic foam roll, lat stretch, hip flexors, pigeon pose, dead hang.'},
       ]},
     ]
@@ -1089,39 +1094,43 @@ const WORKOUT={
     note:'Barbell introduced as primary compound. Supersets added for volume efficiency. HIIT replaces LISS on Saturdays. Every load should exceed Phase 1 maximums.',
     prog:'Top of rep range → add 2.5-5 kg. Supersets: back-to-back with no rest between, rest after both. Drop sets on last set of isolation work. Deload Week 16.',
     days:[
-      {day:'Monday',focus:'Upper Chest + Inner Chest + Serratus',tag:'push-a',exercises:[
-        {n:'Incline Barbell Press (30-35°)',rx:'5 × 6-8',t:'3-1-1',r:'120s',note:'Barbell now primary strength driver. 30-35° only. Last set AMRAP. Track weight every session — progressive overload is the game from here.'},
-        {n:'Incline DB Press (30-35°)',rx:'4 × 10',t:'3-0-1',r:'75s',note:'Secondary after barbell. DB after bar captures the ROM and rotation benefit once strength base is established.'},
+      {day:'Monday',focus:'Upper + Mid Chest + Inner Chest + Serratus',tag:'push-a',exercises:[
+        {n:'Incline Barbell Press (30-35°)',rx:'5 × 6-8',t:'3-1-1',r:'120s',note:'Barbell now primary upper chest strength driver. 30-35° only. Last set AMRAP. Track weight every session — progressive overload is the game from here.'},
+        {n:'Flat Barbell Press',rx:'4 × 8-10',t:'3-1-1',r:'90s',note:'Mid-pec mass. Flat angle recruits sternal fibres completely absent from incline work. Together with incline barbell this gives full pec coverage. Moderate weight — not ego lifting.'},
         {n:'Low-to-High Cable Crossover (hands past midline)',rx:'4 × 15',t:'2-0-2',r:'60s',note:'Hands cross past midline. Squeeze 1 full second at the crossed position. Inner cleavage work. Never rush this.'},
+        {n:'Pec Deck (machine fly)',rx:'3 × 15',t:'2-0-2',r:'60s',note:'Mid and inner chest constant tension. Machine allows heavier load than DB fly with full pec ROM and no stability demand — maximises chest stimulus. Squeeze hard at full adduction.'},
         {n:'SS: Seated DB Lateral + Cable Lateral',rx:'4 × 12+20',t:'2-0-1',r:'60s',note:'Width superset. DB 12 reps immediately into cable 20. No rest between. Width is built with volume.'},
         {n:'Serratus Punch (cable)',rx:'3 × 15 each',t:'2-0-2',r:'45s',note:'Heavier than Phase 1. Full scapular protraction at end range held 1s.'},
-        {n:'Face Pull (rope)',rx:'3 × 20',t:'2-0-2',r:'45s',note:'Every push session.'},
+        {n:'Face Pull (rope)',rx:'3 × 20',t:'2-0-2',r:'45s',note:'Every push session. Shoulder health under heavy pressing volume.'},
         {n:'Overhead Tricep Extension (EZ bar)',rx:'4 × 10',t:'3-0-1',r:'75s',note:'Heavier. Long head priority. Full overhead stretch every rep.'},
       ]},
       {day:'Tuesday',focus:'Lats + Mid Back + Rear Delts + Lower Trap',tag:'pull-a',exercises:[
         {n:'Weighted Pull-Up',rx:'5 × 5-8',t:'3-1-1',r:'120s',note:'Add weight via belt. Last set myo-reps: 5 reps, 15s rest, 3 reps × 3 clusters.'},
-        {n:'Chest-Supported DB Row',rx:'4 × 10',t:'3-1-1',r:'90s',note:'Heavier. Full stretch at bottom.'},
+        {n:'Chest-Supported DB Row',rx:'4 × 10',t:'3-1-1',r:'90s',note:'Heavier. Full stretch at bottom. Chest support eliminates lower back — pure lat and mid-back stimulus.'},
         {n:'SS: Wide Lat Pulldown + Straight-Arm Pulldown',rx:'4 × 10+15',t:'3-0-1',r:'60s',note:'Lat width superset. Exhausts lat fibres from two angles back-to-back.'},
         {n:'SS: Reverse Pec Deck + Face Pull',rx:'4 × 15+20',t:'2-0-2',r:'60s',note:'Rear delt superset at higher volume.'},
+        {n:'Band Pull-Apart',rx:'3 × 25',t:'2-0-1',r:'30s',note:'Rear delt and external rotator frequency. Kept every week — this is the maintenance work that protects the shoulder under heavy Phase 2 loading.'},
         {n:'Prone Y Raise',rx:'3 × 15',t:'2-1-2',r:'45s',note:'Lower trap. Heavier. Posture transformation is happening by Phase 2.'},
-        {n:'Cable Row (close grip)',rx:'3 × 12',t:'3-1-1',r:'75s',note:'Mid-back thickness via constant tension.'},
+        {n:'Cable Row (close grip)',rx:'3 × 12',t:'3-1-1',r:'75s',note:'Mid-back thickness via constant tension. Close grip hits rhomboids and mid-trap.'},
       ]},
-      {day:'Wednesday',focus:'Legs — Definition + Glutes',tag:'legs',exercises:[
-        {n:'Barbell Back Squat (moderate)',rx:'4 × 10',t:'3-1-1',r:'90s',note:'Barbell introduced. Toning focus — moderate weight. Depth to parallel minimum.'},
-        {n:'Romanian Deadlift (barbell)',rx:'4 × 10',t:'3-0-1',r:'90s',note:'Heavier with bar. Full hamstring stretch.'},
+      {day:'Wednesday',focus:'Legs — Definition + Glutes + Hamstrings',tag:'legs',exercises:[
+        {n:'Barbell Back Squat (moderate)',rx:'4 × 10',t:'3-1-1',r:'90s',note:'Barbell introduced. Toning focus — moderate weight. Depth to parallel minimum. Quad, glute, and posterior chain activation.'},
+        {n:'Romanian Deadlift (barbell)',rx:'4 × 10',t:'3-0-1',r:'90s',note:'Heavier with bar. Full hamstring stretch — feel the pull down the back of the leg to the knee.'},
+        {n:'Lying or Seated Leg Curl',rx:'4 × 12',t:'3-0-1',r:'60s',note:'Standalone hamstring contracted-position work. Kept every phase as a standalone because the superset version does not give adequate volume for full hamstring development.'},
         {n:'Hip Thrust (barbell)',rx:'4 × 12',t:'2-2-1',r:'75s',note:'Barbell across hips. 2-second squeeze at top. Glute-ham tie-in.'},
-        {n:'SS: Leg Extension + Leg Curl',rx:'4 × 15+15',t:'2-0-1',r:'60s',note:'Definition superset.'},
-        {n:'Walking Lunges (DBs)',rx:'3 × 15 each',t:'2-0-1',r:'60s',note:'Add dumbbells.'},
+        {n:'Leg Press',rx:'3 × 15',t:'2-1-1',r:'75s',note:'Quad toning and sweep. Full ROM. Feet mid-platform.'},
+        {n:'Walking Lunges (DBs)',rx:'3 × 15 each',t:'2-0-1',r:'60s',note:'Add dumbbells. Glute and quad definition.'},
         {n:'Standing Calf Raise',rx:'5 × 20',t:'2-2-1',r:'45s',note:'Heavier. Full range.'},
         {n:'Ab Rollout (progressing to standing)',rx:'4 × 10',t:'3-0-1',r:'60s',note:'Progress toward standing rollout. Core strength improves all other lifts.'},
       ]},
-      {day:'Thursday',focus:'Shoulders + Traps + Neck',tag:'push-b',exercises:[
-        {n:'Seated DB Overhead Press',rx:'5 × 8',t:'2-1-1',r:'90s',note:'Heavier than Phase 1. Last set myo-reps.'},
+      {day:'Thursday',focus:'Shoulders + Traps + Triceps + Neck',tag:'push-b',exercises:[
+        {n:'Seated DB Overhead Press',rx:'5 × 8',t:'2-1-1',r:'90s',note:'Heavier than Phase 1. Last set myo-reps. Front and lateral delt strength base.'},
         {n:'SS: DB Lateral (forward lean) + Cable Lateral',rx:'5 × 12+20',t:'2-0-1',r:'60s',note:'5 sets of V-shape superset. Shoulder width is built here. Do not reduce this volume.'},
-        {n:'Arnold Press',rx:'3 × 10',t:'2-1-1',r:'75s',note:'Complete delt development.'},
-        {n:'Barbell Shrug',rx:'5 × 12',t:'2-2-1',r:'60s',note:'Heavier with bar. Upper trap thickness.'},
+        {n:'Arnold Press',rx:'3 × 10',t:'2-1-1',r:'75s',note:'Complete delt development — rotational component hits all three heads.'},
+        {n:'Weighted Dips',rx:'4 × 8-10',t:'3-0-1',r:'90s',note:'Best lower chest and tricep compound movement. Lower chest gives the pec the complete rounded shape from clavicle to sternum. Add weight via belt. Slight forward lean for chest bias — upright for tricep bias. Non-negotiable from Phase 2 onwards.'},
+        {n:'Barbell Shrug',rx:'5 × 12',t:'2-2-1',r:'60s',note:'Heavier with bar. Upper trap thickness. 2-second hold at peak.'},
         {n:'Overhead Tricep Extension (cable)',rx:'4 × 12',t:'3-0-1',r:'60s',note:'Long head priority. Constant tension via cable.'},
-        {n:'Tricep Pushdown (rope, drop set last)',rx:'4 × 15',t:'2-0-1',r:'45s',note:'Last set: drop 30% immediately and go to failure.'},
+        {n:'SS: Tricep Pushdown + Cable Kickback',rx:'3 × 15+12',t:'2-0-1',r:'60s',note:'Lateral head superset. Pushdown for mass, kickback for the contracted sweep. Together creates the outer tricep shelf visible in tank tops.'},
         {n:'Lateral Neck Flexion (plate)',rx:'3 × 15 each',t:'2-1-2',r:'45s',note:'Heavier. Consistency is the only driver of neck development.'},
       ]},
       {day:'Friday',focus:'Lats + Arms — Full Development',tag:'pull-b',exercises:[
@@ -1129,15 +1138,17 @@ const WORKOUT={
         {n:'SS: Single-Arm Cable Row + Straight-Arm Pulldown',rx:'4 × 12+15',t:'3-0-1',r:'60s',note:'Lat superset. Full stretch on row, isolate lat on pulldown.'},
         {n:'SS: Incline DB Curl + Cross-Body Hammer Curl',rx:'4 × 10+12',t:'4-0-1',r:'60s',note:'Bicep superset. Peak via incline, thickness via cross-body. 4-count eccentric on incline.'},
         {n:'SS: Skull Crusher + Overhead Extension',rx:'4 × 12+12',t:'3-0-1',r:'60s',note:'Tricep superset. Skull crusher hits all heads, overhead isolates long head. The combination builds the complete horseshoe.'},
-        {n:'Reverse Curl (EZ bar)',rx:'3 × 15',t:'2-0-1',r:'45s',note:'NEW — brachialis and brachioradialis via reverse grip. Builds lower arm and fills out the entire arm from elbow to shoulder.'},
-        {n:'Reverse Pec Deck',rx:'3 × 20',t:'2-0-2',r:'45s',note:'Rear delt frequency maintained.'},
+        {n:'Reverse Curl (EZ bar)',rx:'3 × 15',t:'2-0-1',r:'45s',note:'Brachialis and brachioradialis via reverse grip. Builds lower arm and fills out the entire arm from elbow to shoulder.'},
+        {n:'Reverse Pec Deck',rx:'3 × 20',t:'2-0-2',r:'45s',note:'Rear delt frequency maintained. Face Pull in superset earlier is not sufficient standalone volume.'},
+        {n:'Face Pull (rope)',rx:'3 × 20',t:'2-0-2',r:'45s',note:'Third face pull of the week. Rear delt frequency drives shoulder width and health.'},
       ]},
       {day:'Saturday',focus:'HIIT + Core',tag:'cardio',exercises:[
         {n:'HIIT Cardio (bike preferred)',rx:'25-30 min',t:'—',r:'—',note:'Phase 2 introduces HIIT. Start: 20s max / 40s rest × 15 rounds. Progress to 30s/30s by Week 14. Bike over treadmill — lower joint stress under heavy training load.'},
         {n:'Weighted Cable Crunch',rx:'4 × 20',t:'2-0-1',r:'45s',note:'Progressive overload. Add weight each week.'},
         {n:'Hanging Leg Raise (straight)',rx:'4 × 15',t:'2-0-1',r:'45s',note:'Progress from knee raise to full straight leg.'},
         {n:'Ab Rollout (standing)',rx:'4 × 8',t:'3-0-1',r:'60s',note:'Standing if strength allows. Peak serratus and core activation.'},
-        {n:'Pallof Press',rx:'3 × 12 each',t:'2-1-1',r:'45s',note:'Anti-rotation core stability.'},
+        {n:'Pallof Press',rx:'3 × 12 each',t:'2-1-1',r:'45s',note:'Anti-rotation core stability. Builds the lateral waist tightness that frames the V-taper.'},
+        {n:'Russian Twist (weighted)',rx:'3 × 20',t:'2-0-1',r:'45s',note:'Obliques with added plate. Feet off floor. Full rotation each side.'},
       ]},
       {day:'Sunday',focus:'Active Recovery + Mobility',tag:'rest',exercises:[
         {n:'Walk 30-45 min',rx:'Easy pace',t:'—',r:'—',note:'Non-negotiable.'},
@@ -1150,10 +1161,12 @@ const WORKOUT={
     note:'Heaviest loads of the program. Myo-reps, mechanical drop sets, triple supersets. By Week 24 the physique should be visibly transformed. Deload Week 24 transitions to maintenance training.',
     prog:'Top of range → increase load. If volume prevents load gain, add intensity technique instead. Form never breaks for weight.',
     days:[
-      {day:'Monday',focus:'Upper Chest + Inner Chest — MAX',tag:'push-a',exercises:[
+      {day:'Monday',focus:'Upper + Mid Chest + Inner Chest — MAX',tag:'push-a',exercises:[
         {n:'Incline Barbell Press (30-35°) — Heavy',rx:'5 × 4-6',t:'3-1-1',r:'120s',note:'Max strength day. Spotter mandatory. Last set myo-reps: 6 reps, 15s rest, 3 reps × 3-4 clusters.'},
-        {n:'SS: Incline DB Press + Incline DB Fly',rx:'5 × 10+10',t:'3-0-1',r:'60s',note:'Mechanical drop set. DB press to failure, immediately into fly — same weight, different leverage. Exhausts upper pec completely.'},
-        {n:'Low-to-High Cable Crossover (myo-reps)',rx:'4 × 15',t:'2-0-2',r:'30s',note:'Myo-rep clusters. 15 reps, 10s rest, 5 reps × 3. Hands cross and hold 1s each rep. Inner cleavage peak volume.'},
+        {n:'Flat Barbell Press — Heavy',rx:'4 × 6-8',t:'3-1-1',r:'90s',note:'Peak mid-pec strength. Heaviest flat pressing of the program. Sternal fibres fully loaded — this is what gives the chest the full, rounded 3D look from collarbone to sternum.'},
+        {n:'SS: Incline DB Press + Incline DB Fly',rx:'4 × 10+10',t:'3-0-1',r:'60s',note:'Mechanical drop set. DB press to failure, immediately into fly — same weight, different leverage. Exhausts upper pec completely.'},
+        {n:'Pec Deck — Myo-reps',rx:'4 × 15',t:'2-0-2',r:'30s',note:'Myo-rep clusters. 15 reps, 10s rest, 5 reps × 3. Squeeze hard at full adduction. Inner chest peak volume — the line that separates elite chest development.'},
+        {n:'Low-to-High Cable Crossover (myo-reps)',rx:'3 × 15',t:'2-0-2',r:'30s',note:'Myo-rep clusters. Hands cross and hold 1s each rep. Inner cleavage peak volume to finish.'},
         {n:'Triple SS: Cable Lateral + DB Lateral + Face Pull',rx:'5 × 20+15+20',t:'2-0-1',r:'75s',note:'Full shoulder triple superset. Width and rear delt in one giant set.'},
         {n:'Serratus Punch (heavier)',rx:'4 × 15 each',t:'2-0-2',r:'45s',note:'Heaviest serratus work. Full protraction, 1s hold.'},
         {n:'Overhead Tricep Extension — Heavy + drop set',rx:'4 × 8',t:'3-0-1',r:'75s',note:'Heaviest long head work. Last set: drop weight 30% immediately into rope pushdown to failure.'},
@@ -1162,36 +1175,43 @@ const WORKOUT={
         {n:'Weighted Pull-Up — Heavy',rx:'5 × 4-6',t:'3-1-1',r:'120s',note:'Heaviest pull-up. Last set myo-reps. This should feel completely different to Phase 1.'},
         {n:'Triple SS: Wide Pulldown + Straight-Arm + Single-Arm Row',rx:'4 × 10+15+10',t:'3-0-1',r:'75s',note:'Full lat triple superset. Three angles, complete lat exhaustion.'},
         {n:'Chest-Supported DB Row — Heavy',rx:'4 × 8',t:'3-1-1',r:'90s',note:'Heaviest back thickness. Form stays perfect due to support.'},
-        {n:'Triple SS: Reverse Pec Deck + Face Pull + Band Pull-Apart',rx:'5 × 20+20+20',t:'2-0-2',r:'60s',note:'Rear delt triple superset at peak volume.'},
+        {n:'Triple SS: Reverse Pec Deck + Face Pull + Band Pull-Apart',rx:'5 × 20+20+20',t:'2-0-2',r:'60s',note:'Rear delt triple superset at peak volume. Band pull-apart as the finisher locks in external rotation at fatigue.'},
         {n:'Prone Y Raise (weighted)',rx:'4 × 15',t:'2-1-2',r:'45s',note:'Add light plate. Lower trap peak. Posture transformation visible by Phase 3.'},
       ]},
-      {day:'Wednesday',focus:'Legs — Peak Definition + Glutes',tag:'legs',exercises:[
-        {n:'Barbell Back Squat',rx:'5 × 8',t:'3-1-1',r:'90s',note:'Heavier than Phase 2. Toning still.'},
-        {n:'Romanian Deadlift — Heavy',rx:'4 × 8',t:'3-0-1',r:'90s',note:'Heaviest RDL. Full hamstring stretch.'},
-        {n:'Hip Thrust — Heavy',rx:'4 × 10',t:'2-2-1',r:'75s',note:'Heaviest glute work. 2s hold at top.'},
-        {n:'SS: Leg Extension + Leg Curl',rx:'5 × 20+20',t:'2-0-1',r:'45s',note:'Peak definition volume.'},
-        {n:'SS: Walking Lunge + Step Up',rx:'4 × 12+12 each',t:'2-0-1',r:'60s',note:'Glute and quad definition superset.'},
+      {day:'Wednesday',focus:'Legs — Peak Definition + Glutes + Hamstrings',tag:'legs',exercises:[
+        {n:'Barbell Back Squat',rx:'5 × 8',t:'3-1-1',r:'90s',note:'Heavier than Phase 2. Toning still primary — never sacrifice ROM for weight.'},
+        {n:'Romanian Deadlift — Heavy',rx:'4 × 8',t:'3-0-1',r:'90s',note:'Heaviest RDL. Full hamstring stretch. This is the posterior chain peak.'},
+        {n:'Lying or Seated Leg Curl — Heavy',rx:'4 × 10',t:'3-0-1',r:'75s',note:'Heaviest hamstring contracted work. Leg curl remains standalone in Phase 3 — critical for complete hamstring development that the superset version alone cannot achieve.'},
+        {n:'Hip Thrust — Heavy',rx:'4 × 10',t:'2-2-1',r:'75s',note:'Heaviest glute work. 2s hold at top. Glute-ham tie-in is the defining feature of the athletic body.'},
+        {n:'SS: Leg Extension + Leg Press',rx:'4 × 15+12',t:'2-0-1',r:'60s',note:'Quad definition superset. Extension isolates VMO, press adds overall quad sweep.'},
+        {n:'SS: Walking Lunge + Step Up',rx:'4 × 12+12 each',t:'2-0-1',r:'60s',note:'Glute and quad definition superset. Step-up hits gluteus medius for the side glute shape.'},
         {n:'Calf Raise — drop set',rx:'5 × 20',t:'2-2-1',r:'30s',note:'Last 2 sets: drop 30% immediately.'},
         {n:'Standing Ab Rollout',rx:'4 × 10',t:'3-0-1',r:'60s',note:'Peak core and serratus. Standing version only.'},
       ]},
-      {day:'Thursday',focus:'Shoulders + Traps + Neck — MAX',tag:'push-b',exercises:[
+      {day:'Thursday',focus:'Shoulders + Chest + Traps + Triceps + Neck — MAX',tag:'push-b',exercises:[
         {n:'Seated DB Overhead Press — Heavy',rx:'5 × 6',t:'2-1-1',r:'120s',note:'Heaviest shoulder press. Last set myo-reps.'},
+        {n:'Weighted Dips — Heavy',rx:'4 × 6-8',t:'3-0-1',r:'90s',note:'Heaviest lower chest and tricep work of the program. Forward lean for chest bias. This is where the lower pec fullness that completes the chest is built. Heaviest dips should feel earned.'},
         {n:'Triple SS: Arnold Press + DB Lateral + Cable Lateral',rx:'5 × 8+15+20',t:'2-0-1',r:'75s',note:'Complete delt triple superset. All heads, both equipment types. V-shape is built here.'},
         {n:'Barbell Shrug — Heavy',rx:'5 × 12',t:'2-2-1',r:'60s',note:'Heaviest traps.'},
         {n:'Overhead Tricep Extension (myo-reps)',rx:'4 × 12',t:'3-0-1',r:'30s',note:'Myo-rep clusters. Long head peak volume.'},
-        {n:'SS: Tricep Pushdown + Bodyweight Dips',rx:'4 × 15+max',t:'2-0-1',r:'60s',note:'Tricep superset to failure. Dips after pushdown — pre-exhausted, every rep counts.'},
-        {n:'Lateral Neck Flexion — Heaviest',rx:'4 × 15 each',t:'2-1-2',r:'45s',note:'6 months of neck training produces visible results by this point.'},
+        {n:'Triple SS: Tricep Pushdown + Cable Kickback + Bodyweight Dips',rx:'4 × 15+12+max',t:'2-0-1',r:'75s',note:'Complete tricep triple superset. All three heads at peak volume. Pushdown for lateral, kickback for sweep, dips for lower head and full contraction.'},
+        {n:'Lateral Neck Flexion — Heaviest',rx:'4 × 15 each',t:'2-1-2',r:'45s',note:'6 months of neck training produces visible results by this point. The neck frames the entire physique.'},
       ]},
       {day:'Friday',focus:'Lats + Arms — MAX',tag:'pull-b',exercises:[
-        {n:'Weighted Pull-Up — Heavy',rx:'5 × 5',t:'3-1-1',r:'90s',note:'Heaviest lat. Third pull-up day of the week.'},
+        {n:'Weighted Pull-Up — Heavy',rx:'5 × 5',t:'3-1-1',r:'90s',note:'Heaviest lat. Third pull-up day of the week. The lat width at this point should be dramatically wider than Phase 1.'},
         {n:'Triple SS: Wide Pulldown + Single-Arm Row + Straight-Arm',rx:'4 × 10+10+15',t:'3-0-1',r:'75s',note:'Full lat triple superset at peak volume.'},
         {n:'Triple SS: Incline DB Curl + Cross-Body Hammer + Reverse Curl',rx:'4 × 10+12+15',t:'4-0-1',r:'60s',note:'Complete bicep and brachialis triple superset. Peak, thickness, and lower arm — all three.'},
-        {n:'Triple SS: Skull Crusher + Overhead Extension + Pushdown',rx:'4 × 10+12+15',t:'3-0-1',r:'60s',note:'Complete tricep triple superset. All three heads at peak volume. The horseshoe is built in this set.'},
-        {n:'Reverse Pec Deck',rx:'4 × 20',t:'2-0-2',r:'45s',note:'Rear delt maintained at peak.'},
+        {n:'Triple SS: Skull Crusher + Overhead Extension + Cable Kickback',rx:'4 × 10+12+12',t:'3-0-1',r:'75s',note:'Complete tricep triple superset. All three heads at peak volume. Skull crusher for mass, overhead for long head, kickback for the contracted outer sweep. The horseshoe is finished here.'},
+        {n:'Reverse Pec Deck',rx:'4 × 20',t:'2-0-2',r:'45s',note:'Rear delt maintained at peak. Third rear delt session of the week.'},
+        {n:'Face Pull (rope)',rx:'3 × 20',t:'2-0-2',r:'45s',note:'Rear delt frequency at peak. Shoulder health maintained throughout heaviest phase.'},
       ]},
       {day:'Saturday',focus:'HIIT + Core — Peak',tag:'cardio',exercises:[
         {n:'HIIT Sprints (bike or track)',rx:'30 min',t:'—',r:'—',note:'Peak intensity. 20s max effort / 20s rest × 20 rounds.'},
-        {n:'Weighted Ab Circuit — 4 rounds',rx:'4 rounds',t:'—',r:'60s between rounds',note:'Cable crunch × 20, hanging straight leg raise × 15, standing rollout × 10, Russian twist × 20. No rest between exercises within a round.'},
+        {n:'Weighted Cable Crunch',rx:'4 × 20',t:'2-0-1',r:'45s',note:'Heaviest cable crunch. Full spinal flexion at bottom.'},
+        {n:'Hanging Straight Leg Raise',rx:'4 × 15',t:'2-0-1',r:'45s',note:'Full straight leg raise. Control the descent.'},
+        {n:'Standing Ab Rollout',rx:'4 × 10',t:'3-0-1',r:'60s',note:'Peak serratus and core. Full extension only.'},
+        {n:'Pallof Press — Heavy',rx:'4 × 12 each',t:'2-1-1',r:'45s',note:'Heaviest anti-rotation work. The waist tightness from this frames the V-taper.'},
+        {n:'Russian Twist (weighted)',rx:'3 × 20',t:'2-0-1',r:'45s',note:'Weighted plate. Feet off floor. Full oblique peak volume.'},
       ]},
       {day:'Sunday',focus:'Active Recovery + Mobility',tag:'rest',exercises:[
         {n:'Walk 45-60 min',rx:'Easy pace',t:'—',r:'—',note:'Longer walks as conditioning improves. Non-negotiable.'},
@@ -1203,38 +1223,38 @@ const WORKOUT={
 
 // ── MEAL DATA — 15 CORE MEALS WITH EXACT COOKBOOK MICRONUTRIENTS ──
 const MEALS = {
-  breakfast:{label:'🌅 Breakfast',target_protein:51,target_cals:433,options:[
+  breakfast:{label:'🌅 Breakfast',target_protein:54,target_cals:477,options:[
     {id:'b1',name:'B1 — Greek Yogurt Power Bowl',protein:55,cals:520,carbs:38,fat:12,
-     note:'300g Oikos Triple Zero · 1 scoop vanilla whey isolate · 30g toasted oats · 1 tbsp chia seeds · frozen berries · 1 tbsp almond butter',
+     note:'300g Oikos Triple Zero · 1 scoop vanilla whey isolate · 30g toasted oats · 1 tbsp chia seeds · frozen berries · 1 tbsp almond butter. No cooking. Best low-appetite morning.',
      micro:[['Calcium','~400mg'],['Potassium','~450mg'],['Magnesium','~80mg'],['Zinc','~2mg'],['Iron','~3mg'],['Omega-3 ALA','~2.5g'],['Fiber','~8g'],['Vitamin B12','~1.5mcg'],['Vitamin C','~15mg'],['Phosphorus','~380mg']]},
-    {id:'b2',name:'B2 — Egg Muffins + Cottage Cheese',protein:50,cals:400,carbs:12,fat:18,
-     note:'4 egg muffins (Sunday batch) · 150g 2% cottage cheese + 1 tbsp chia stirred in · handful berries. Reheat 60s.',
-     micro:[['Vitamin D','~2.5mcg'],['Choline','~420mg'],['Calcium','~350mg'],['Vitamin B12','~2.2mcg'],['Selenium','~38mcg'],['Zinc','~3.2mg'],['Vitamin A','~180mcg'],['Omega-3 ALA','~2.5g'],['Phosphorus','~420mg'],['Riboflavin B2','~0.8mg']]},
-    {id:'b3',name:'B3 — Savory Cottage Cheese Bowl',protein:48,cals:380,carbs:14,fat:16,
-     note:'250g 2% cottage cheese · 2 hard-boiled eggs (Sunday batch) · cherry tomatoes · cucumber · everything bagel seasoning · garlic sriracha. Best injection day breakfast.',
-     micro:[['Calcium','~280mg'],['Vitamin C','~45mg'],['Lycopene','~4mg'],['Choline','~280mg'],['Vitamin D','~2mcg'],['Selenium','~30mcg'],['Potassium','~520mg'],['Vitamin K','~25mcg'],['Folate','~60mcg'],['Phosphorus','~340mg']]},
+    {id:'b2',name:'B2 — Turkey Breakfast Burrito',protein:61,cals:530,carbs:45,fat:14,
+     note:'Batch Sunday, freeze. 93/7 ground turkey + egg whites + refried black beans + fat free cheddar + Ole Extreme Wellness 10" wrap + avocado crema. Reheat 90s or air fryer 8 min from frozen.',
+     micro:[['Choline','~280mg'],['Vitamin B6','~1.4mg'],['Iron','~4mg'],['Folate','~110mcg'],['Zinc','~4mg'],['Potassium','~680mg'],['Selenium','~35mcg'],['Magnesium','~65mg'],['Vitamin K','~30mcg'],['Phosphorus','~450mg']]},
+    {id:'b3',name:'B3 — AM Meatzilla Burrito',protein:52,cals:380,carbs:28,fat:12,
+     note:'Batch Sunday, freeze. 150g egg whites + 2 turkey bacon slices + 1 turkey sausage patty + 28g fat free cheddar + Ole Carb Balance wrap. Air fryer 400F 8 min from frozen. Best injection day breakfast.',
+     micro:[['Choline','~240mg'],['Selenium','~30mcg'],['Vitamin B12','~1.8mcg'],['Phosphorus','~380mg'],['Zinc','~2.5mg'],['Sodium','~650mg'],['Niacin B3','~10mg'],['Iron','~3mg'],['Potassium','~420mg'],['Riboflavin B2','~0.6mg']]},
   ]},
-  lunch:{label:'🥗 Lunch',target_protein:59,target_cals:590,options:[
-    {id:'l1',name:'L1 — Chicken Breast Taco Rice Bowl',protein:55,cals:580,carbs:62,fat:10,
-     note:'180-200g cooked chicken (Sunday batch) · 150g jasmine rice · black beans · cherry tomatoes · bell pepper · cheddar · chipotle avocado mayo',
-     micro:[['Vitamin B6','~1.4mg'],['Niacin B3','~18mg'],['Iron','~4mg'],['Folate','~110mcg'],['Potassium','~680mg'],['Magnesium','~65mg'],['Vitamin C','~80mg'],['Zinc','~3.5mg'],['Selenium','~32mcg'],['Phosphorus','~480mg']]},
-    {id:'l2',name:'L2 — Ground Beef Sweet Potato Bowl',protein:59,cals:630,carbs:55,fat:20,
-     note:'210g cooked 93/7 beef (Sunday batch) · 180-200g roasted sweet potato · spinach · cherry tomatoes · cheddar · garlic sriracha',
-     micro:[['Beta-Carotene','~9mg'],['Vitamin A','~900mcg'],['Potassium','~820mg'],['Zinc','~6.5mg'],['Vitamin B12','~2.8mcg'],['Iron','~4.5mg'],['Vitamin K','~120mcg'],['Magnesium','~70mg'],['Lycopene','~5mg'],['Vitamin C','~35mg']]},
-    {id:'l3',name:'L3 — Ground Turkey Rice Bowl',protein:60,cals:570,carbs:55,fat:14,
-     note:'200g ground turkey (Sunday batch, soy+ginger+garlic+sesame) · 150g jasmine rice · spinach · feta · bell pepper · garlic sriracha',
-     micro:[['Vitamin K','~180mcg'],['Folate','~130mcg'],['Iron','~4mg'],['Calcium','~180mg'],['Vitamin C','~120mcg'],['Selenium','~35mcg'],['Magnesium','~85mg'],['Manganese','~2.5mg'],['Niacin B3','~12mg'],['Phosphorus','~420mg']]},
+  lunch:{label:'🥗 Lunch',target_protein:59,target_cals:597,options:[
+    {id:'l1',name:'L1 — Bang Bang Chicken Potato Bowl',protein:58,cals:590,carbs:48,fat:12,
+     note:'220g cooked chicken breast (Sunday batch) · 250g air-fried crispy potatoes (Sunday batch) · Bang Bang sauce (Greek yogurt + sweet chili + sriracha + light mayo + honey) · green onion. Reheat 90s, add sauce cold.',
+     micro:[['Niacin B3','~20mg'],['Vitamin B6','~1.6mg'],['Potassium','~980mg'],['Selenium','~40mcg'],['Phosphorus','~520mg'],['Magnesium','~70mg'],['Iron','~3mg'],['Vitamin C','~25mg'],['Zinc','~3mg'],['Vitamin B12','~0.9mcg']]},
+    {id:'l2',name:'L2 — Loaded Taco Street Corn Bowl',protein:60,cals:620,carbs:52,fat:18,
+     note:'170g cooked 93/7 beef + street corn mix (Sunday batch) · 120g crispy roasted potatoes · pico de gallo · light guac · Smoky Chipotle Lime Crema · fresh cilantro. Reheat beef + potatoes 90s, add cold toppings.',
+     micro:[['Zinc','~7mg'],['Iron','~5mg'],['Vitamin B12','~3mg'],['Beta-Carotene','~3mg'],['Potassium','~820mg'],['Magnesium','~70mg'],['Niacin B3','~14mg'],['Vitamin C','~40mg'],['Selenium','~28mcg'],['Phosphorus','~460mg']]},
+    {id:'l3',name:'L3 — Kogi Chicken Rice Bowl',protein:58,cals:580,carbs:55,fat:10,
+     note:'200g soy-ginger marinated chicken (Sunday batch) · 150g jasmine rice cooked in broth · shredded romaine · spring onions · Zesty Cilantro Yogurt Sauce. Reheat chicken + rice 90s, add cold lettuce + sauce.',
+     micro:[['Niacin B3','~18mg'],['Vitamin B6','~1.5mg'],['Selenium','~35mcg'],['Manganese','~2mg'],['Potassium','~680mg'],['Phosphorus','~480mg'],['Magnesium','~60mg'],['Iron','~3.5mg'],['Zinc','~3mg'],['Vitamin K','~25mcg']]},
   ]},
-  dinner:{label:'🍽️ Dinner',target_protein:59,target_cals:603,options:[
-    {id:'d1',name:'D1 — Baked Chicken + Roasted Potato + Spinach',protein:65,cals:580,carbs:42,fat:14,
-     note:'220-250g chicken (Sunday batch) · 200g baby potatoes (Sunday batch) · spinach wilted with garlic + olive oil + lemon (3 min fresh) · chipotle avocado mayo',
-     micro:[['Niacin B3','~22mg'],['Vitamin B6','~1.8mg'],['Potassium','~1100mg'],['Vitamin K','~200mcg'],['Iron','~4mg'],['Vitamin C','~55mg'],['Magnesium','~80mg'],['Selenium','~40mcg'],['Folate','~100mcg'],['Vitamin B12','~0.9mcg']]},
-    {id:'d2',name:'D2 — Ground Beef Smash Burger Bowl',protein:55,cals:620,carbs:40,fat:22,
-     note:'250g 90/10 beef (2 patties, always fresh) · cheddar · 200g roasted sweet potato (reheated) · romaine · tomato · pickles · chipotle avocado mayo. Highest heat. Smash immediately.',
-     micro:[['Beta-Carotene','~9mg'],['Vitamin A','~900mcg'],['Zinc','~8mg'],['Iron','~5mg'],['Vitamin B12','~3.5mcg'],['Potassium','~780mg'],['Calcium','~220mg'],['Selenium','~28mcg'],['Vitamin K','~35mcg'],['CLA','~0.5g']]},
-    {id:'d3',name:'D3 — Ground Turkey Bolognese Pasta Bowl',protein:60,cals:610,carbs:60,fat:15,
-     note:"200g ground turkey · 150g Banza chickpea pasta · Rao's marinara · garlic + onion · Italian seasoning · 20g parmesan. Sauce can be Sunday batch, pasta always fresh.",
-     micro:[['Chickpea Fiber','~8g'],['Chickpea Protein','~14g'],['Selenium','~38mcg'],['Lycopene','~12mg'],['Calcium','~250mg'],['Niacin B3','~14mg'],['Potassium','~720mg'],['Iron','~5mg'],['Folate','~90mcg'],['Vitamin C','~25mg']]},
+  dinner:{label:'🍽️ Dinner',target_protein:59,target_cals:597,options:[
+    {id:'d1',name:'D1 — Garlic Parmesan Chicken + Crispy Potatoes',protein:62,cals:590,carbs:40,fat:18,
+     note:'220g cooked chicken thighs (Sunday batch) · 250g air-fried crispy potatoes (Sunday batch) · creamy garlic parmesan Greek yogurt sauce (Greek yogurt + light mayo + garlic paste + parmesan + water). Reheat 90s, sauce cold.',
+     micro:[['Niacin B3','~14mg'],['Selenium','~38mcg'],['Vitamin B6','~1.2mg'],['Potassium','~900mg'],['Phosphorus','~460mg'],['Calcium','~200mg'],['Iron','~3mg'],['Vitamin C','~20mg'],['Magnesium','~65mg'],['Zinc','~4.5mg']]},
+    {id:'d2',name:'D2 — Loaded Big Mac Smash Burger Bowl',protein:58,cals:600,carbs:42,fat:22,
+     note:'2 x 110g 93/7 beef smash patties (always cook fresh — 2 min per side, high heat, smash flat with mustard) · 250g crispy potatoes (reheated from batch) · shredded romaine · pickles · diced onion · Big Mac sauce (Greek yogurt + light mayo + ketchup + mustard + pickle juice + pickles).',
+     micro:[['Zinc','~8mg'],['Iron','~5mg'],['Vitamin B12','~3.5mcg'],['CLA','~0.5g'],['Potassium','~780mg'],['Selenium','~28mcg'],['Niacin B3','~12mg'],['Phosphorus','~440mg'],['Magnesium','~60mg'],['Vitamin K','~35mcg']]},
+    {id:'d3',name:'D3 — Loaded Sweet Potato Turkey Bowl',protein:58,cals:600,carbs:48,fat:16,
+     note:'200g taco-seasoned ground turkey (Sunday batch) · 200g roasted sweet potato (Sunday batch) · pico de gallo · light guacamole · Smoky Chipotle Lime Crema · fresh cilantro. Reheat turkey + sweet potato 90s, add toppings cold.',
+     micro:[['Beta-Carotene','~12mg'],['Vitamin A','~1000mcg'],['Potassium','~950mg'],['Vitamin C','~45mg'],['Magnesium','~75mg'],['Iron','~4mg'],['Zinc','~4.5mg'],['Vitamin B6','~1.2mg'],['Folate','~120mcg'],['Fiber','~8g']]},
   ]},
   snacks:{label:'🍎 Snacks',target_protein:35,target_cals:240,options:[
     {id:'sn1',name:'SN1 — Cottage Cheese + Fruit + Chia',protein:40,cals:380,carbs:22,fat:11,
@@ -1255,11 +1275,10 @@ const MEALS = {
      note:'1 scoop chocolate whey · 1 tbsp dark cocoa · 1 egg · 2 tbsp Greek yogurt · 1 tsp baking powder. Microwave 60-75 seconds. 5 minutes total.',
      micro:[['Beta-Glucan','~1.5g'],['Theobromine','~200mg'],['Flavanols','high'],['Choline','~140mg'],['Vitamin E','~4mg'],['Magnesium','~70mg'],['Tryptophan','~0.4g'],['Zinc','~2.8mg'],['Iron','~3mg'],['Resveratrol','trace']]},
     {id:'ds3',name:'DS3 — Chocolate Protein Pudding Cups',protein:33,cals:320,carbs:24,fat:9,
-     note:'250ml unsweetened almond milk · 1 scoop chocolate whey · 3 tbsp chia seeds · 1 tbsp cocoa · 1 tsp honey. Mix whey in first until dissolved, then add chia. Refrigerate overnight. Make 4 Sunday. Highest fiber dessert — 12g per cup. On low-protein days choose DS1 or DS2 instead.',
+     note:'250ml unsweetened almond milk · 1 scoop chocolate whey · 3 tbsp chia seeds · 1 tbsp cocoa · 1 tsp honey. Mix whey in first until dissolved, then add chia. Refrigerate overnight. Make 4 Sunday.',
      micro:[['Omega-3 ALA','~5g per cup'],['Fiber','~12g per cup'],['Calcium','~280mg'],['Theobromine','~150mg'],['Flavanols','high'],['Magnesium','~95mg'],['Iron','~3mg'],['Zinc','~2mg'],['Phosphorus','~360mg'],['Vitamin E','~2.5mg']]},
   ]},
 };
-
 // ── SUPPLEMENT DATA — TIMED FOR BEST ABSORPTION, INTERACTIONS CONSIDERED ──
 const SUPPS=[
   {
@@ -1320,6 +1339,8 @@ function init(){
   // badges set after data load
 
   S=JSON.parse(localStorage.getItem('ggp_s')||'{"startWeight":"122.5","goalWeight":"95","height":"186","protein":"240","cals":"2400","water":"4.5"}');
+  // Migrate water target: ensure minimum 4.5L
+  if(!S.water||parseFloat(S.water)<4.5){S.water='4.5';localStorage.setItem('ggp_s',JSON.stringify(S));}
   logs=JSON.parse(localStorage.getItem('ggp_l')||'[]');
   sessions=JSON.parse(localStorage.getItem('ggp_t')||'[]');
   mealLog=JSON.parse(localStorage.getItem('ggp_m')||'{}');
@@ -1480,7 +1501,7 @@ function renderDashboard(){
   const todayMeals=mealLog[today]||[];
   const mP=todayMeals.reduce((a,m)=>a+(m.protein||0),0);
   const mC=todayMeals.reduce((a,m)=>a+(m.cals||0),0);
-  const ptgt=parseInt(S.protein)||240;const ctgt=parseInt(S.cals)||2400;const wtgt=parseFloat(S.water)||3.5;
+  const ptgt=parseInt(S.protein)||240;const ctgt=parseInt(S.cals)||2400;const wtgt=parseFloat(S.water)||4.5;
   document.getElementById('d-protein-txt').textContent=mP+' / '+ptgt+'g';
   document.getElementById('d-protein-bar').style.width=Math.min(100,mP/ptgt*100)+'%';
   document.getElementById('d-cal-txt').textContent=mC+' / '+ctgt+' kcal';
@@ -2320,7 +2341,7 @@ function renderHydration(){
   const today=new Date().toISOString().split('T')[0];
   const d=hydrationLog[today]||{water:[],pee:[]};
   const total=d.water.reduce((a,w)=>a+(w.amount||0),0);
-  const wtgt=parseFloat(S.water)||3.5;
+  const wtgt=parseFloat(S.water)||4.5;
 
   const txtEl=document.getElementById('hyd-total-txt');if(txtEl)txtEl.textContent=total.toFixed(2)+'L / '+wtgt+'L';
   const barEl=document.getElementById('hyd-bar');if(barEl)barEl.style.width=Math.min(100,total/wtgt*100)+'%';
