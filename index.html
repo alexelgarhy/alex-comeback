@@ -532,6 +532,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.5;}
           <div style="font-family:'Courier New',monospace;font-size:11px;color:var(--muted)" id="meal-date-display">—</div>
           <div style="flex:1;margin:0 1rem">
             <div class="macro-bar-row" style="margin-bottom:4px"><div class="macro-bar-label" style="font-size:10px"><span style="color:var(--green)">Protein</span><span id="m-protein-txt">0/240g</span></div><div class="macro-bar-track"><div class="macro-bar-fill bar-protein" id="m-protein-bar" style="width:0%"></div></div></div>
+            <div class="macro-bar-row" style="margin-bottom:4px"><div class="macro-bar-label" style="font-size:10px"><span style="color:var(--accent)">Min Protein</span><span id="m-minpro-txt">0/180g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" id="m-minpro-bar" style="width:0%;background:var(--accent)"></div></div></div>
             <div class="macro-bar-row" style="margin:0"><div class="macro-bar-label" style="font-size:10px"><span style="color:var(--gold)">Calories</span><span id="m-cal-txt">0/2400</span></div><div class="macro-bar-track"><div class="macro-bar-fill bar-cal" id="m-cal-bar" style="width:0%"></div></div></div>
           </div>
         </div>
@@ -988,7 +989,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.5;}
       <div>
         <label>DEXA Body Fat %</label><input type="number" id="s-bf" step="0.1">
         <label>Daily Protein Target (g)</label><input type="number" id="s-protein" value="240">
-        <label>Daily Calorie Target</label><input type="number" id="s-cals" value="2400"><div style="font-size:11px;color:var(--muted);margin-top:4px">Rest days reduce by 200-300 kcal. Reassess every 10kg lost.</div>
+        <label>Daily Calorie Target</label><input type="number" id="s-cals" value="2400"><div style="font-size:11px;color:var(--muted);margin-top:4px">⚠️ On Mounjaro your appetite will be suppressed — especially months 1-3. Do NOT force 2,400 calories. Your non-negotiable floor is 180g protein daily. Calories can float between 1,600-2,400 based on hunger. Protein protects muscle. Calories are secondary. Rest days: reduce carbs by 30-40g, keep protein identical.</div>
         <label>Daily Water Target (L)</label><input type="number" id="s-water" value="4.5" step="0.5">
       </div>
     </div>
@@ -1373,8 +1374,8 @@ const WORKOUT={
 const MEALS = {
   breakfast:{label:'🌅 Breakfast',target_protein:54,target_cals:477,options:[
     {id:'b1',name:'B1 — Greek Yogurt Power Bowl',protein:55,cals:520,carbs:38,fat:12,
-     note:'300g Oikos Triple Zero · 1 scoop vanilla whey isolate · 30g toasted oats · 1 tbsp chia seeds · frozen berries · 1 tbsp almond butter. No cooking. Best low-appetite morning.',
-     micro:[['Calcium','~400mg'],['Potassium','~450mg'],['Magnesium','~80mg'],['Zinc','~2mg'],['Iron','~3mg'],['Omega-3 ALA','~2.5g'],['Fiber','~8g'],['Vitamin B12','~1.5mcg'],['Vitamin C','~15mg'],['Phosphorus','~380mg']]},
+     note:'300g Oikos Triple Zero · 1 scoop vanilla whey isolate · 30g toasted oats · 1 tbsp chia seeds · 1 tbsp ground flaxseed · frozen berries · 1 tbsp almond butter. No cooking. Best low-appetite morning.',
+     micro:[['Calcium','~400mg'],['Potassium','~450mg'],['Magnesium','~80mg'],['Zinc','~2mg'],['Iron','~3mg'],['Omega-3 ALA','~5g'],['Fiber','~10g'],['Vitamin B12','~1.5mcg'],['Vitamin C','~15mg'],['Phosphorus','~380mg']]},
     {id:'b2',name:'B2 — Turkey Breakfast Burrito',protein:61,cals:530,carbs:45,fat:14,
      note:'Batch Sunday, freeze. 93/7 ground turkey + egg whites + refried black beans + fat free cheddar + Ole Extreme Wellness 10" wrap + avocado crema. Reheat 90s or air fryer 8 min from frozen.',
      micro:[['Choline','~280mg'],['Vitamin B6','~1.4mg'],['Iron','~4mg'],['Folate','~110mcg'],['Zinc','~4mg'],['Potassium','~680mg'],['Selenium','~35mcg'],['Magnesium','~65mg'],['Vitamin K','~30mcg'],['Phosphorus','~450mg']]},
@@ -1427,55 +1428,49 @@ const MEALS = {
      micro:[['Omega-3 ALA','~5g per cup'],['Fiber','~12g per cup'],['Calcium','~280mg'],['Theobromine','~150mg'],['Flavanols','high'],['Magnesium','~95mg'],['Iron','~3mg'],['Zinc','~2mg'],['Phosphorus','~360mg'],['Vitamin E','~2.5mg']]},
   ]},
 };
-// ── SUPPLEMENT DATA — TIMED FOR BEST ABSORPTION, INTERACTIONS CONSIDERED ──
 const SUPPS=[
   {
     section:'🌅 Breakfast',
-    why:'Fat-soluble vitamins absorb best with dietary fat. Zinc must be away from iron-rich meals (lunch/dinner). Effexor XR requires consistent morning timing with food — never fasted, never after 2 PM.',
     items:[
-      {id:'effexor',name:'Effexor XR 150mg',dose:'150mg',time:'With breakfast — NEVER fasted',warn:null},
-      {id:'k2d3',name:'K2 + D3',dose:'120mcg K2 / 1,000 IU D3',time:'With breakfast (fat present)',warn:null},
-      {id:'zinc',name:'Zinc Picolinate',dose:'15-20mg (dietary zinc covers the rest)',time:'With breakfast — away from iron-rich meals',warn:'⚠️ Zinc competes with iron. Never take at lunch or dinner (beef, turkey, spinach). Breakfast only.'},
-      {id:'biotin',name:'Biotin',dose:'5,000mcg',time:'With breakfast',warn:'⚠️ Stop 48-72h before any bloodwork.'},
-      {id:'lmnt',name:'Electrolytes',dose:'1 packet in 500ml water',time:'Every morning before breakfast',warn:'⚠️ On injection Fridays drink before food to help manage nausea. Target 4.5L every day including rest and injection days. No large fluids after 9 PM — finish your water by 9 PM to protect sleep quality.'},
+      {id:'effexor',name:'Effexor XR 150mg',dose:'150mg',time:'With breakfast — never fasted',warn:null},
+      {id:'k2d3',name:'K2 + D3',dose:'120mcg K2 / 1,000 IU D3',time:'With breakfast',warn:null},
+      {id:'zinc',name:'Zinc Picolinate',dose:'25mg',time:'With breakfast',warn:'⚠️ Breakfast only — competes with iron at lunch/dinner.'},
+      {id:'biotin',name:'Biotin',dose:'5,000mcg',time:'With breakfast',warn:'⚠️ Stop 48-72h before bloodwork.'},
+      {id:'lmnt',name:'Electrolytes',dose:'1 packet in 500ml water',time:'Before breakfast',warn:null},
     ]
   },
   {
-    section:'☀️ Mid-Morning (between meals)',
-    why:'Collagen synthesis requires Vitamin C as a cofactor — always take together. Mid-morning away from large meals improves uptake. Separate from calcium-rich meals to avoid competition.',
+    section:'🏋️ Pre-Training (9:00 AM)',
     items:[
-      {id:'collagen',name:'Collagen Peptides',dose:'15g in water or juice',time:'Mid-morning, away from large meals',warn:null},
-      {id:'vitc',name:'Vitamin C',dose:'1,000mg',time:'Same time as collagen — required cofactor',warn:'✅ Also take at iron-rich meals (L3, D1) to boost plant iron absorption by up to 3x.'},
+      {id:'collagen',name:'Collagen Peptides',dose:'15g in water or juice',time:'9:00 AM — 60 min before training',warn:null},
+      {id:'vitc',name:'Vitamin C',dose:'1,000mg',time:'With collagen — always together',warn:null},
     ]
   },
   {
-    section:'🍽️ Lunch (largest meal)',
-    why:'CoQ10 and Omega-3 are fat-soluble — absorb best with the largest fat-containing meal. D3 50,000 IU on Sundays only. Move Omega-3 to breakfast on injection Fridays if GI issues occur. Psyllium husk taken post-lunch counteracts Mounjaro-induced constipation and extends fullness.',
+    section:'🍽️ Lunch',
     items:[
-      {id:'coq10',name:'CoQ10',dose:'300mg',time:'With lunch (fat-soluble)',warn:null},
-      {id:'omega3',name:'Omega-3 Fish Oil',dose:'2-3 softgels (1.8-2.7g EPA+DHA)',time:'With lunch — avoid injection day if nausea occurs',warn:'⚠️ Mounjaro slows gastric emptying. On injection days (Friday), take omega-3 at breakfast instead if GI issues occur.'},
-      {id:'d3w',name:'D3 50,000 IU',dose:'50,000 IU — once weekly (Sundays only)',time:'Sunday lunch only — largest fat meal of the week',warn:null},
-      {id:'psyllium',name:'Psyllium Husk Powder',dose:'1 tsp in 100ml water — drink fast before it gels',time:'Right after lunch supplements — follow immediately with water check',warn:'⚠️ Mounjaro already slows motility. Take psyllium daily without skipping. Must drink full water check immediately after.'},
+      {id:'coq10',name:'CoQ10',dose:'300mg',time:'With lunch',warn:null},
+      {id:'omega3',name:'Omega-3 Fish Oil',dose:'3 softgels (2.7g EPA+DHA)',time:'With lunch',warn:'⚠️ On injection Fridays move to breakfast if nausea occurs.'},
+      {id:'bergamot',name:'Citrus Bergamot Extract',dose:'500-1,000mg',time:'With lunch',warn:null},
+      {id:'d3w',name:'D3 50,000 IU',dose:'50,000 IU',time:'Sundays only',warn:null},
+      {id:'psyllium',name:'Psyllium Husk Powder',dose:'1 tsp in 100ml water',time:'After lunch supplements — drink fast, follow with water',warn:null},
     ]
   },
   {
     section:'💪 Post-Workout',
-    why:'Whey within 60 min maximises muscle protein synthesis. Creatine uptake enhanced by post-workout insulin spike. On Mounjaro days thirst is suppressed — drink an extra 500ml when taking creatine.',
     items:[
       {id:'whey',name:'Whey Isolate',dose:'1-1.5 scoops',time:'Within 60 min post-workout',warn:null},
-      {id:'creatine',name:'Creatine Monohydrate',dose:'5g',time:'Post-workout with shake or carbs',warn:'⚠️ Mounjaro suppresses thirst. On Mounjaro days drink an extra 500ml water when taking creatine or risk cramping.'},
+      {id:'creatine',name:'Creatine Monohydrate',dose:'5g',time:'With post-workout shake',warn:'⚠️ Drink extra 500ml water with creatine.'},
     ]
   },
   {
-    section:'💊 Medications',
-    why:'Mounjaro Friday evening after dinner — side effects peak Sat/Sun when you can rest and are not training.',
+    section:'💉 Medications',
     items:[
-      {id:'mounjaro',name:'Mounjaro',dose:'As prescribed by obesity clinic',time:'Friday evening after dinner',warn:'⚠️ Injection day rules: eat slowly, avoid carbonation, eat warm not cold food. On dose increase weeks simplify to your 3 easiest meals until body adjusts.'},
+      {id:'mounjaro',name:'Mounjaro',dose:'As prescribed',time:'Friday evening after dinner',warn:'⚠️ Eat slowly, avoid carbonation, eat warm food on injection day.'},
     ]
   },
   {
     section:'🌙 Before Bed',
-    why:'Magnesium glycinate promotes deep sleep and GABA activity — the benefit is entirely timing-dependent. Morning dosing wastes it. 30-60 min before bed is the window.',
     items:[
       {id:'mag',name:'Magnesium Bisglycinate',dose:'400mg (2 caps)',time:'30-60 min before bed',warn:null},
     ]
@@ -2117,8 +2112,17 @@ function updateMealBars(){
   const m=mealLog[today]||[];
   const tP=m.reduce((a,x)=>a+(x.protein||0),0);const tC=m.reduce((a,x)=>a+(x.cals||0),0);
   const ptgt=parseInt(S.protein)||240;const ctgt=parseInt(S.cals)||2400;
+  const minPro=180;
   document.getElementById('m-protein-txt').textContent=tP+'/'+ptgt+'g';
   document.getElementById('m-protein-bar').style.width=Math.min(100,tP/ptgt*100)+'%';
+  const minBar=document.getElementById('m-minpro-bar');
+  const minTxt=document.getElementById('m-minpro-txt');
+  if(minBar&&minTxt){
+    minTxt.textContent=tP+'/'+minPro+'g';
+    minBar.style.width=Math.min(100,tP/minPro*100)+'%';
+    minBar.style.background=tP>=minPro?'var(--green)':'var(--accent)';
+    minTxt.style.color=tP>=minPro?'var(--green)':'var(--accent)';
+  }
   document.getElementById('m-cal-txt').textContent=tC+'/'+ctgt;
   document.getElementById('m-cal-bar').style.width=Math.min(100,tC/ctgt*100)+'%';
 }
@@ -2796,6 +2800,7 @@ const SHOPPING = {
     pantry: [
       ['Rolled oats', '210g (30g × 7)'],
       ['Chia seeds', '7 tsp'],
+      ['Ground flaxseed (pre-ground)', '7 tbsp — buy pre-ground, ~$8/bag lasts months'],
       ['Natural almond butter', '7 tbsp'],
       ['Honey', 'check stock'],
       ['Cinnamon', 'check stock'],
