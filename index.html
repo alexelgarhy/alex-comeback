@@ -613,6 +613,69 @@ textarea{resize:vertical;min-height:80px;line-height:1.5;}
       </div>
     </div>
 
+    <div id="sp-planner" class="sub-panel">
+      <div class="card">
+        <div class="card-title">🛒 Weekly Meal Planner</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;">Select one meal per category. Generates your Sunday shopping list.</p>
+        <div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.25rem;">
+          <div>
+            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:.35rem;">🍳 Breakfast (7 servings)</label>
+            <select id="pl-breakfast" style="width:100%;padding:.5rem .75rem;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:14px;">
+              <option value="b1">B1 — Greek Yogurt Power Bowl</option>
+              <option value="b2">B2 — Turkey Breakfast Burrito</option>
+              <option value="b3">B3 — AM Meatzilla Burrito</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:.35rem;">🥗 Lunch (7 servings)</label>
+            <select id="pl-lunch" style="width:100%;padding:.5rem .75rem;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:14px;">
+              <option value="l1">L1 — Bang Bang Chicken Potato Bowl</option>
+              <option value="l2">L2 — Loaded Taco Street Corn Bowl</option>
+              <option value="l3">L3 — Kogi Chicken Rice Bowl</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:.35rem;">🍎 Snack (7 servings)</label>
+            <select id="pl-snack" style="width:100%;padding:.5rem .75rem;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:14px;">
+              <option value="sn1">SN1 — Cottage Cheese + Fruit + Chia</option>
+              <option value="sn2">SN2 — Tuna Cucumber Boats + Cottage Cheese</option>
+              <option value="sn3">SN3 — Yogurt or Cottage Cheese + Whey + Eggs</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:.35rem;">🍽️ Dinner (7 servings)</label>
+            <select id="pl-dinner" style="width:100%;padding:.5rem .75rem;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:14px;">
+              <option value="d1">D1 — Garlic Parmesan Chicken + Crispy Potatoes</option>
+              <option value="d2">D2 — Loaded Big Mac Smash Burger Bowl</option>
+              <option value="d3">D3 — Loaded Sweet Potato Turkey Bowl</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:.35rem;">🍫 Dessert (7 servings)</label>
+            <select id="pl-dessert" style="width:100%;padding:.5rem .75rem;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:14px;">
+              <option value="ds1">DS1 — Chocolate Cottage Cheese Mousse</option>
+              <option value="ds2">DS2 — Chocolate Protein Mug Cake</option>
+              <option value="ds3">DS3 — Chocolate Protein Pudding Cups</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-acc" style="width:100%;padding:.75rem;font-size:15px;" onclick="generateShoppingList()">🛒 Generate Shopping List</button>
+      </div>
+      <div id="pl-result" style="display:none;">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;">
+            <div class="card-title" style="margin-bottom:0">📋 Shopping List</div>
+            <button class="btn btn-sec btn-sm" onclick="copyShoppingList()">📋 Copy</button>
+          </div>
+          <div id="pl-list-content"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">📊 Week Summary</div>
+          <div id="pl-summary"></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -625,28 +688,23 @@ textarea{resize:vertical;min-height:80px;line-height:1.5;}
         <button class="ptab" onclick="showWarmup('wu-push',this)">Push</button>
         <button class="ptab" onclick="showWarmup('wu-pull',this)">Pull</button>
         <button class="ptab" onclick="showWarmup('wu-legs',this)">Legs</button>
-        <button class="ptab" onclick="showWarmup('wu-cooldown',this)">Cooldown</button>
         <button class="ptab" onclick="showWarmup('wu-rest',this)">Rest Day</button>
         <button class="ptab" onclick="showWarmup('wu-timer',this)">⏱ Timer</button>
       </div>
       <div id="wu-general">
         <div class="card"><div class="card-title">Every Session — General (3 min)</div><table class="t"><tr><th>Exercise</th><th>Duration</th></tr><tr><td>Incline treadmill walk or bike</td><td>3 min</td></tr><tr><td>Arm circles (forward + back)</td><td>10 each</td></tr><tr><td>Torso rotations</td><td>10 each side</td></tr><tr><td>Hip circles</td><td>10 each direction</td></tr></table></div>
-        <div class="card"><div class="card-title">Ramp Sets — Every Compound</div><table class="t"><tr><th>Set</th><th>% of Working Weight</th><th>Reps</th><th>Rest</th></tr><tr><td>Ramp 1</td><td>50%</td><td>8</td><td>60s</td></tr><tr><td>Ramp 2</td><td>70%</td><td>5</td><td>60s</td></tr><tr><td>Ramp 3</td><td>85%</td><td>3</td><td>90s</td></tr></table></div>
       </div>
       <div id="wu-push" style="display:none">
-        <div class="card"><div class="card-title">Push Day Warm-Up</div><table class="t"><tr><th>Exercise</th><th>Sets × Reps</th></tr><tr><td>Thoracic extension over foam roller</td><td>1 × 60s</td></tr><tr><td>Band pull-apart</td><td>2 × 15</td></tr><tr><td>Wall slides</td><td>2 × 10</td></tr><tr><td>Face pull (light)</td><td>2 × 15</td></tr><tr><td>Incline press ramp sets</td><td>3 ramp sets</td></tr></table></div>
+        <div class="card"><div class="card-title">Push Day Warm-Up</div><table class="t"><tr><th>Exercise</th><th>Sets × Reps</th></tr><tr><td>Thoracic extension over foam roller</td><td>1 × 60s</td></tr><tr><td>Band pull-apart</td><td>2 × 15</td></tr><tr><td>Wall slides</td><td>2 × 10</td></tr><tr><td>Face pull (light)</td><td>2 × 15</td></tr></table></div>
         <div class="card"><div class="card-title">Push Day Cooldown</div><table class="t"><tr><th>Stretch</th><th>Duration</th></tr><tr><td>Doorway pec stretch</td><td>45s each side</td></tr><tr><td>Sleeper stretch</td><td>45s each side</td></tr><tr><td>Cross-body shoulder</td><td>30s each side</td></tr><tr><td>Child's pose</td><td>60s</td></tr><tr><td>Band pull-apart + face pull (light)</td><td>2 × 20</td></tr></table></div>
       </div>
       <div id="wu-pull" style="display:none">
-        <div class="card"><div class="card-title">Pull Day Warm-Up</div><table class="t"><tr><th>Exercise</th><th>Sets × Reps</th></tr><tr><td>Thoracic foam roll</td><td>1 × 60s</td></tr><tr><td>Dead hang</td><td>2 × 20-30s</td></tr><tr><td>Band pull-apart</td><td>2 × 15</td></tr><tr><td>Scapular pull-up</td><td>2 × 10</td></tr><tr><td>Pulldown ramp sets</td><td>3 ramp sets</td></tr></table></div>
+        <div class="card"><div class="card-title">Pull Day Warm-Up</div><table class="t"><tr><th>Exercise</th><th>Sets × Reps</th></tr><tr><td>Thoracic foam roll</td><td>1 × 60s</td></tr><tr><td>Dead hang</td><td>2 × 20-30s</td></tr><tr><td>Band pull-apart</td><td>2 × 15</td></tr><tr><td>Scapular pull-up</td><td>2 × 10</td></tr></table></div>
         <div class="card"><div class="card-title">Pull Day Cooldown</div><table class="t"><tr><th>Stretch</th><th>Duration</th></tr><tr><td>Lat overhead stretch</td><td>45s each side</td></tr><tr><td>Cat-cow</td><td>10 slow reps</td></tr><tr><td>Thread-the-needle</td><td>30s each side</td></tr><tr><td>Dead hang</td><td>2 × 30s</td></tr><tr><td>Lat foam roll</td><td>60s each side</td></tr></table></div>
       </div>
       <div id="wu-legs" style="display:none">
         <div class="card"><div class="card-title">Legs Day Warm-Up</div><table class="t"><tr><th>Exercise</th><th>Sets × Reps</th></tr><tr><td>Hip circles</td><td>10 each direction</td></tr><tr><td>World's greatest stretch</td><td>5 each side</td></tr><tr><td>Deep squat hold</td><td>2 × 30s</td></tr><tr><td>Glute bridge</td><td>2 × 15</td></tr><tr><td>BW split squat</td><td>2 × 10 each</td></tr><tr><td>Leg swings</td><td>10 each leg</td></tr></table></div>
         <div class="card"><div class="card-title">Legs Day Cooldown</div><table class="t"><tr><th>Stretch</th><th>Duration</th></tr><tr><td>Standing quad stretch</td><td>45s each side</td></tr><tr><td>Hip flexor kneeling stretch</td><td>60s each side</td></tr><tr><td>Seated hamstring stretch</td><td>45s each side</td></tr><tr><td>Pigeon pose</td><td>90s each side</td></tr><tr><td>Calf stretch</td><td>45s each</td></tr><tr><td>IT band + glute foam roll</td><td>60s each side</td></tr></table></div>
-      </div>
-      <div id="wu-cooldown" style="display:none">
-        <div class="card"><div class="card-title">Shoulder Health — Every Session</div><table class="t"><tr><th>Exercise</th><th>Sets × Reps</th></tr><tr><td>Band pull-apart</td><td>2 × 20</td></tr><tr><td>Face pull (light)</td><td>2 × 20</td></tr><tr><td>Sleeper stretch</td><td>45s each side</td></tr><tr><td>Dead hang</td><td>2 × 30s</td></tr></table></div>
       </div>
       <div id="wu-rest" style="display:none">
         <div class="card"><div class="card-title">Sunday — Full Mobility (15-20 min)</div><table class="t"><tr><th>Exercise</th><th>Duration</th></tr><tr><td>Thoracic foam roll</td><td>2 min</td></tr><tr><td>Lat foam roll</td><td>90s each side</td></tr><tr><td>Glute + IT band</td><td>60s each side</td></tr><tr><td>World's greatest stretch</td><td>5 each side</td></tr><tr><td>90/90 hip rotation</td><td>10 each side</td></tr><tr><td>Dead hang</td><td>3 × 45s</td></tr><tr><td>Pigeon pose</td><td>90s each side</td></tr><tr><td>Deep squat hold</td><td>2 × 60s</td></tr></table></div>
@@ -683,6 +741,85 @@ textarea{resize:vertical;min-height:80px;line-height:1.5;}
       <div id="wp-p3" class="workout-phase" style="display:none"></div>
     </div>
 
+    <div id="sp-cooldown" class="sub-panel">
+      <div class="phase-tabs">
+        <button class="ptab active" onclick="showCooldown('cd-push',this)">Push</button>
+        <button class="ptab" onclick="showCooldown('cd-pull',this)">Pull</button>
+        <button class="ptab" onclick="showCooldown('cd-legs',this)">Legs</button>
+        <button class="ptab" onclick="showCooldown('cd-shoulder',this)">Shoulder Health</button>
+        <button class="ptab" onclick="showCooldown('cd-timer',this)">⏱ Timer</button>
+      </div>
+      <div id="cd-push">
+        <div class="card">
+          <div class="card-title">Push Day Cooldown</div>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:.75rem">Hold each stretch. Breathe into it. Don't rush.</p>
+          <table class="t"><tr><th>Stretch</th><th>Duration</th></tr>
+            <tr><td>Doorway pec stretch</td><td>45s each side</td></tr>
+            <tr><td>Sleeper stretch</td><td>45s each side</td></tr>
+            <tr><td>Cross-body shoulder</td><td>30s each side</td></tr>
+            <tr><td>Child's pose</td><td>60s</td></tr>
+            <tr><td>Band pull-apart</td><td>2 × 20</td></tr>
+            <tr><td>Face pull (light)</td><td>2 × 20</td></tr>
+          </table>
+        </div>
+      </div>
+      <div id="cd-pull" style="display:none">
+        <div class="card">
+          <div class="card-title">Pull Day Cooldown</div>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:.75rem">Decompress the spine. Release the lats and rear delts.</p>
+          <table class="t"><tr><th>Stretch</th><th>Duration</th></tr>
+            <tr><td>Lat overhead stretch</td><td>45s each side</td></tr>
+            <tr><td>Cat-cow</td><td>10 slow reps</td></tr>
+            <tr><td>Thread-the-needle</td><td>30s each side</td></tr>
+            <tr><td>Dead hang</td><td>2 × 30s</td></tr>
+            <tr><td>Lat foam roll</td><td>60s each side</td></tr>
+          </table>
+        </div>
+      </div>
+      <div id="cd-legs" style="display:none">
+        <div class="card">
+          <div class="card-title">Legs Day Cooldown</div>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:.75rem">Priority: hip flexors and hamstrings. Hold longer than you think you need to.</p>
+          <table class="t"><tr><th>Stretch</th><th>Duration</th></tr>
+            <tr><td>Standing quad stretch</td><td>45s each side</td></tr>
+            <tr><td>Hip flexor kneeling stretch</td><td>60s each side</td></tr>
+            <tr><td>Seated hamstring stretch</td><td>45s each side</td></tr>
+            <tr><td>Pigeon pose</td><td>90s each side</td></tr>
+            <tr><td>Calf stretch</td><td>45s each</td></tr>
+            <tr><td>IT band + glute foam roll</td><td>60s each side</td></tr>
+          </table>
+        </div>
+      </div>
+      <div id="cd-shoulder" style="display:none">
+        <div class="card">
+          <div class="card-title">Shoulder Health — Every Session</div>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:.75rem">Do this after every training session regardless of the day. Protects the joint under heavy pressing and pulling volume.</p>
+          <table class="t"><tr><th>Exercise</th><th>Sets × Reps</th></tr>
+            <tr><td>Band pull-apart</td><td>2 × 20</td></tr>
+            <tr><td>Face pull (light)</td><td>2 × 20</td></tr>
+            <tr><td>Sleeper stretch</td><td>45s each side</td></tr>
+            <tr><td>Dead hang</td><td>2 × 30s</td></tr>
+          </table>
+        </div>
+      </div>
+      <div id="cd-timer" style="display:none">
+        <div class="card" style="text-align:center;padding:2rem">
+          <div id="cd-timer-display" style="font-family:'Bebas Neue',sans-serif;font-size:5rem;color:var(--text);line-height:1;margin:1rem 0">00:45</div>
+          <div id="cd-timer-label" style="font-size:11px;color:var(--muted);margin-bottom:1.25rem">READY</div>
+          <div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:.875rem">
+            <button class="btn btn-primary" id="cd-start-btn" onclick="cdTimerStart()">Start</button>
+            <button class="btn btn-sec" onclick="cdTimerReset()">Reset</button>
+          </div>
+          <div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap">
+            <button class="btn btn-sec btn-sm" onclick="cdSetTimer(30)">30s</button>
+            <button class="btn btn-sec btn-sm" onclick="cdSetTimer(45)">45s</button>
+            <button class="btn btn-sec btn-sm" onclick="cdSetTimer(60)">60s</button>
+            <button class="btn btn-sec btn-sm" onclick="cdSetTimer(90)">90s</button>
+            <button class="btn btn-sec btn-sm" onclick="cdSetTimer(120)">2 min</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="sp-log-session" class="sub-panel">
       <div class="card">
         <div class="fb" style="margin-bottom:.875rem"><div class="card-title" style="margin:0">Log a Session</div><button class="btn btn-sec btn-sm" onclick="autoFillSession()">Load Today's Workout</button></div>
@@ -1693,8 +1830,200 @@ function drawChart(){
   wlR.forEach((l,i)=>{if(i%step===0||i===wlR.length-1)ctx.fillText(l.date.slice(5),xp(i),H-7);});
 }
 
+// ── YOUTUBE EXERCISE LINKS ────────────────────────────────────────────────────
+// Exact YouTube search queries for every exercise in the program
+const YT_QUERIES = {
+  // CHEST
+  'Incline DB Press (30-35°)': 'incline dumbbell press 30 degree chest',
+  'Incline Barbell Press (30-35°)': 'incline barbell bench press 30 degree',
+  'Flat DB Press': 'flat dumbbell bench press form',
+  'Flat Barbell Press': 'flat barbell bench press form',
+  'Low-to-High Cable Crossover': 'low to high cable crossover inner chest',
+  'Low-to-High Cable Crossover (hands past midline)': 'low to high cable crossover past midline',
+  'Low-to-High Cable Crossover (myo-reps)': 'low to high cable crossover',
+  'Incline DB Fly': 'incline dumbbell fly upper chest form',
+  'Pec Deck (machine fly)': 'pec deck machine fly form',
+  'Pec Deck — Myo-reps': 'pec deck machine fly myo reps',
+  'Weighted Dips': 'weighted dips chest form technique',
+  'Weighted Dips — Heavy': 'weighted dips chest form technique',
+  // SHOULDERS
+  'Seated DB Overhead Press': 'seated dumbbell overhead shoulder press form',
+  'Seated DB Overhead Press — Heavy': 'seated dumbbell overhead shoulder press form',
+  'Cable Lateral Raise': 'cable lateral raise shoulder form',
+  'Seated DB Lateral Raise (with forward lean)': 'dumbbell lateral raise forward lean medial delt',
+  'Arnold Press (seated)': 'seated arnold press form technique',
+  'Arnold Press': 'seated arnold press form technique',
+  'Face Pull (rope)': 'cable rope face pull form technique',
+  'Band Pull-Apart': 'band pull apart rear delt form',
+  'Reverse Pec Deck': 'reverse pec deck rear delt form',
+  // SERRATUS / LOWER TRAP
+  'Serratus Punch (cable, high-to-low)': 'cable serratus punch high to low form',
+  'Serratus Punch (cable)': 'cable serratus punch form technique',
+  'Serratus Punch (heavier)': 'cable serratus punch form technique',
+  'Prone Y Raise': 'prone Y raise lower trap form',
+  'Prone Y Raise (weighted)': 'prone Y raise lower trap weighted',
+  // BACK / LATS
+  'Assisted Pull-Up or Pull-Up': 'pull up form technique full range of motion',
+  'Pull-Up (close grip) or Assisted': 'close grip pull up form lower lat',
+  'Weighted Pull-Up': 'weighted pull up belt form technique',
+  'Weighted Pull-Up (close grip)': 'weighted close grip pull up form',
+  'Weighted Pull-Up — Heavy': 'weighted pull up heavy form technique',
+  'Wide Grip Lat Pulldown': 'wide grip lat pulldown form technique',
+  'Chest-Supported DB Row': 'chest supported dumbbell row form technique',
+  'Chest-Supported DB Row — Heavy': 'chest supported dumbbell row form technique',
+  'Straight-Arm Pulldown (cable)': 'cable straight arm pulldown lat form',
+  'Cable Row (close grip)': 'close grip cable seated row form',
+  'Single-Arm Cable Row': 'single arm cable row form technique',
+  // LEGS
+  'Goblet Squat': 'goblet squat form technique depth',
+  'Barbell Back Squat (moderate)': 'barbell back squat form technique depth',
+  'Barbell Back Squat': 'barbell back squat form technique depth',
+  'Romanian Deadlift (DBs)': 'dumbbell romanian deadlift form hamstring stretch',
+  'Romanian Deadlift (barbell)': 'barbell romanian deadlift form hamstring stretch',
+  'Romanian Deadlift — Heavy': 'barbell romanian deadlift heavy form technique',
+  'Lying or Seated Leg Curl': 'lying leg curl machine form hamstring',
+  'Lying or Seated Leg Curl — Heavy': 'lying leg curl machine form hamstring',
+  'Leg Press': 'machine leg press form feet placement',
+  'Hip Thrust (bodyweight)': 'bodyweight hip thrust form glute squeeze',
+  'Hip Thrust (barbell)': 'barbell hip thrust form glute activation',
+  'Hip Thrust — Heavy': 'barbell hip thrust heavy form technique',
+  'Walking Lunges': 'walking lunge form technique glute quad',
+  'Walking Lunges (DBs)': 'dumbbell walking lunge form technique',
+  'Standing Calf Raise': 'standing calf raise form full range of motion',
+  'Calf Raise — drop set': 'calf raise drop set technique',
+  'Leg Extension': 'machine leg extension form VMO quad',
+  'Step Up': 'dumbbell step up form glutes',
+  // TRAPS
+  'DB Shrug': 'dumbbell shrug form upper trap',
+  'Barbell Shrug': 'barbell shrug form upper trap',
+  'Barbell Shrug — Heavy': 'barbell shrug heavy form technique',
+  // TRICEPS
+  'Overhead Tricep Extension (cable or EZ bar)': 'cable overhead tricep extension long head form',
+  'Overhead Tricep Extension (EZ bar)': 'ez bar overhead tricep extension form',
+  'Overhead Tricep Extension (cable)': 'cable overhead tricep extension long head form',
+  'Overhead Tricep Extension — Heavy + drop set': 'cable overhead tricep extension drop set',
+  'Overhead Tricep Extension (myo-reps)': 'cable overhead tricep extension myo reps',
+  'Tricep Pushdown (rope)': 'cable rope tricep pushdown form technique',
+  'Cable Kickback': 'cable tricep kickback lateral head form',
+  'Skull Crusher (EZ bar)': 'ez bar skull crusher tricep form technique',
+  // BICEPS
+  'Incline DB Curl': 'incline dumbbell curl bicep peak long head form',
+  'Cross-Body Hammer Curl': 'cross body hammer curl brachialis form',
+  'Hammer Curl (standard)': 'hammer curl dumbbell form brachialis',
+  'Reverse Curl (EZ bar)': 'ez bar reverse curl brachialis form',
+  // NECK
+  'Lateral Neck Flexion (plate)': 'plate neck lateral flexion exercise form',
+  'Lateral Neck Flexion — Heaviest': 'plate neck lateral flexion exercise form',
+  // CORE / ABS
+  'Ab Rollout (kneeling)': 'ab wheel rollout kneeling form technique',
+  'Ab Rollout (progressing to standing)': 'ab wheel rollout standing progression',
+  'Standing Ab Rollout': 'ab wheel rollout standing form technique',
+  'Weighted Cable Crunch': 'weighted cable crunch form technique abs',
+  'Hanging Knee Raise': 'hanging knee raise form lower abs',
+  'Hanging Leg Raise (straight)': 'hanging straight leg raise form lower abs',
+  'Hanging Straight Leg Raise': 'hanging straight leg raise form lower abs',
+  'Russian Twist': 'russian twist obliques form technique',
+  'Russian Twist (weighted)': 'weighted russian twist plate obliques form',
+  'Pallof Press': 'pallof press cable anti rotation core form',
+  'Pallof Press — Heavy': 'pallof press cable anti rotation core form',
+  // SUPERSET ENTRIES
+  'SS: Seated DB Lateral + Cable Lateral': 'lateral raise superset dumbbell cable shoulder width',
+  'SS: Wide Lat Pulldown + Straight-Arm Pulldown': 'lat pulldown straight arm pulldown superset',
+  'SS: Reverse Pec Deck + Face Pull': 'reverse pec deck face pull superset rear delt',
+  'SS: DB Lateral (forward lean) + Cable Lateral': 'lateral raise superset dumbbell cable shoulder width',
+  'SS: Single-Arm Cable Row + Straight-Arm Pulldown': 'cable row straight arm pulldown superset lats',
+  'SS: Incline DB Curl + Cross-Body Hammer Curl': 'incline curl cross body hammer curl superset bicep',
+  'SS: Skull Crusher + Overhead Extension': 'skull crusher overhead extension superset tricep',
+  'SS: Tricep Pushdown + Cable Kickback': 'tricep pushdown kickback superset lateral head',
+  'SS: Leg Extension + Leg Press': 'leg extension leg press superset quad',
+  'SS: Walking Lunge + Step Up': 'walking lunge step up superset glutes',
+  'Triple SS: Cable Lateral + DB Lateral + Face Pull': 'cable lateral raise dumbbell lateral face pull triple superset',
+  'Triple SS: Wide Pulldown + Straight-Arm + Single-Arm Row': 'lat pulldown straight arm row triple superset lats',
+  'Triple SS: Reverse Pec Deck + Face Pull + Band Pull-Apart': 'reverse pec deck face pull band pull apart triple superset rear delt',
+  'Triple SS: Arnold Press + DB Lateral + Cable Lateral': 'arnold press lateral raise triple superset shoulders',
+  'Triple SS: Tricep Pushdown + Cable Kickback + Bodyweight Dips': 'tricep pushdown kickback dips triple superset',
+  'Triple SS: Wide Pulldown + Single-Arm Row + Straight-Arm': 'lat pulldown single arm row straight arm triple superset',
+  'Triple SS: Incline DB Curl + Cross-Body Hammer + Reverse Curl': 'incline curl hammer curl reverse curl triple superset bicep',
+  'Triple SS: Skull Crusher + Overhead Extension + Cable Kickback': 'skull crusher overhead extension kickback triple superset tricep',
+  // CARDIO
+  'LISS Cardio (walk, cycle, or swim)': 'LISS cardio zone 2 training fat loss',
+  'HIIT Cardio (bike preferred)': 'HIIT cardio stationary bike intervals',
+  'HIIT Sprints (bike or track)': 'HIIT sprint intervals bike track',
+  // ACTIVE RECOVERY
+  'Walk 30-45 min': 'zone 2 walking active recovery',
+  'Walk 45-60 min': 'zone 2 walking active recovery benefits',
+  'Full mobility routine': 'full body mobility routine foam rolling stretching',
+  'Full mobility 20-30 min': 'full body mobility routine foam rolling stretching',
+  // WARMUP
+  'Incline treadmill walk or bike': 'incline treadmill walk warmup cardio',
+  'Arm circles (forward + back)': 'arm circles warmup shoulder mobility',
+  'Torso rotations': 'torso rotation warmup mobility',
+  'Hip circles': 'hip circles warmup mobility',
+  'Thoracic extension over foam roller': 'thoracic extension foam roller warmup',
+  'Wall slides': 'wall slides shoulder warmup form',
+  'Face pull (light)': 'cable face pull light warmup shoulder health',
+  'Thoracic foam roll': 'thoracic spine foam roll mobility',
+  'Dead hang': 'dead hang lat stretch decompression form',
+  'Scapular pull-up': 'scapular pull up warmup shoulder activation',
+  'World\'s greatest stretch': 'worlds greatest stretch form technique',
+  'Deep squat hold': 'deep squat hold mobility flexibility',
+  'Glute bridge': 'glute bridge warmup activation form',
+  'BW split squat': 'bodyweight split squat warmup form',
+  'Leg swings': 'leg swings warmup hip mobility',
+  // COOLDOWN STRETCHES
+  'Doorway pec stretch': 'doorway pec stretch chest flexibility',
+  'Sleeper stretch': 'sleeper stretch shoulder internal rotation',
+  'Cross-body shoulder': 'cross body shoulder stretch form',
+  'Child\'s pose': 'child pose stretch form hold',
+  'Band pull-apart + face pull (light)': 'band pull apart face pull cooldown shoulder',
+  'Lat overhead stretch': 'lat overhead stretch form flexibility',
+  'Cat-cow': 'cat cow stretch spine mobility form',
+  'Thread-the-needle': 'thread the needle stretch thoracic rotation',
+  'Lat foam roll': 'lat foam rolling technique form',
+  'Standing quad stretch': 'standing quad stretch form balance',
+  'Hip flexor kneeling stretch': 'kneeling hip flexor stretch form',
+  'Seated hamstring stretch': 'seated hamstring stretch form flexibility',
+  'Pigeon pose': 'pigeon pose hip stretch form',
+  'Calf stretch': 'calf stretch wall form flexibility',
+  'IT band + glute foam roll': 'IT band glute foam rolling technique',
+  'Band pull-apart': 'band pull apart rear delt form',
+  'Lat foam roll': 'lat foam rolling technique',
+  '90/90 hip rotation': '90 90 hip stretch rotation form',
+};
+
+function getMWUrl(name) {
+  const q = YT_QUERIES[name] || name;
+  return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q);
+}
+
+function addWarmupYTButtons() {
+  document.querySelectorAll('#sp-warmup table:not(.no-yt) td:first-child').forEach(td => {
+    const name = td.textContent.trim();
+    if (!name || td.querySelector('a')) return;
+    const btn = document.createElement('a');
+    btn.href = getMWUrl(name);
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    btn.textContent = '▶ Show';
+    btn.style.cssText = 'display:inline-block;margin-left:.5rem;padding:.15rem .45rem;border-radius:5px;background:var(--bg3);border:1px solid var(--border);font-size:10px;font-weight:600;color:var(--accent);text-decoration:none;vertical-align:middle;';
+    td.appendChild(btn);
+  });
+}
+
+function buildExRow(e, i) {
+  const url = getMWUrl(e.n);
+  return '<div class="ex-row-motra">' +
+    '<div class="ex-num">' + (i+1) + '</div>' +
+    '<div class="ex-info">' +
+      '<div class="ex-name-motra">' + e.n + '</div>' +
+      '<div class="ex-detail">' + e.rx + ' \u00b7 ' + e.t + ' \u00b7 ' + (e.note||'') + '</div>' +
+      '<a href="' + url + '" target="_blank" rel="noopener" style="display:inline-block;margin-top:.4rem;padding:.25rem .6rem;border-radius:6px;background:var(--bg3);border:1px solid var(--border);font-size:11px;font-weight:600;color:var(--accent);text-decoration:none;letter-spacing:.3px;">\u25b6 Show Exercise</a>' +
+    '</div>' +
+    '<span class="ex-rest-badge">' + e.r + '</span>' +
+    '</div>';
+}
+
 function buildWorkout(){
-  // Deload week detection
   if(S.startDate){
     const days=Math.max(0,Math.floor((new Date()-new Date(S.startDate))/86400000));
     const week=Math.floor(days/7)+1;
@@ -1713,9 +2042,10 @@ function buildWorkout(){
   ['p1','p2','p3'].forEach(pk=>{
     const ph=WORKOUT[pk];const container=document.getElementById('wp-'+pk);
     let html=`<div class="fb" style="margin-bottom:.875rem;padding:.5rem .75rem;background:var(--surface2);border-radius:6px;border:1px solid var(--border)"><span style="font-size:11px;color:var(--soft)">⚡ ${ph.prog}</span><button class="btn btn-sec btn-sm" onclick="expandAll('${pk}')">Expand All</button></div>`;
+    html+=`<div class="card" style="margin-bottom:.75rem"><div class="card-title">📋 Ramp Sets — Every Compound</div><table class="t"><tr><th>Set</th><th>% of Working Weight</th><th>Reps</th><th>Rest</th></tr><tr><td>Ramp 1</td><td>50%</td><td>8</td><td>60s</td></tr><tr><td>Ramp 2</td><td>70%</td><td>5</td><td>60s</td></tr><tr><td>Ramp 3</td><td>85%</td><td>3</td><td>90s</td></tr></table></div>`;
     ph.days.forEach((day,idx)=>{
       const tc=day.tag.startsWith('push')?'tag-push':day.tag.startsWith('pull')?'tag-pull':day.tag==='legs'?'tag-legs':day.tag==='cardio'?'tag-cardio':'tag-rest';
-      html+=`<div class="day-card"><div class="day-header" onclick="toggleDay(this,'day-${pk}-${idx}')"><div><div class="day-name">${day.day}</div><div class="day-focus">${day.focus}</div></div><div style="display:flex;align-items:center;gap:.5rem"><span class="day-tag ${tc}">${day.tag.replace('-',' ').toUpperCase()}</span><span class="toggle-arrow">›</span></div></div><div class="day-body" id="day-${pk}-${idx}">${day.exercises.map((e,i)=>`<div class="ex-row-motra"><div class="ex-num">${i+1}</div><div class="ex-info"><div class="ex-name-motra">${e.n}</div><div class="ex-detail">${e.rx} · ${e.t} · ${e.note||''}</div></div><span class="ex-rest-badge">${e.r}</span></div>`).join('')}</div></div>`;
+      html+=`<div class="day-card"><div class="day-header" onclick="toggleDay(this,'day-${pk}-${idx}')"><div><div class="day-name">${day.day}</div><div class="day-focus">${day.focus}</div></div><div style="display:flex;align-items:center;gap:.5rem"><span class="day-tag ${tc}">${day.tag.replace('-',' ').toUpperCase()}</span><span class="toggle-arrow">›</span></div></div><div class="day-body" id="day-${pk}-${idx}">${day.exercises.map((e,i)=>buildExRow(e,i)).join('')}</div></div>`;
     });
     container.innerHTML=html;
   });
@@ -2178,11 +2508,13 @@ const SUB_NAVS = {
     {id:'sp-meals', label:'Meals'},
     {id:'sp-supps', label:'Supplements'},
     {id:'sp-hydration', label:'Hydration'},
+    {id:'sp-planner', label:'Planner'},
     {id:'sp-eatout', label:'Eating Out'},
   ],
   train: [
     {id:'sp-warmup', label:'Warm-Up'},
     {id:'sp-workout', label:'Workout Plan'},
+    {id:'sp-cooldown', label:'Cooldown'},
     {id:'sp-log-session', label:'Log Session'},
   ],
   progress: [
@@ -2211,6 +2543,7 @@ function navMain(id, btn) {
   if (id === 'main') renderDashboard();
   if (id === 'nutrition') { buildMeals(); buildSupps(); buildHydration(); }
   if (id === 'train') buildWorkout();
+  if (id === 'train') setTimeout(addWarmupYTButtons, 100);
   if (id === 'progress') { renderMilestones(); renderHistory(); renderSessions(); renderPRs(); }
   if (id === 'settings') loadSettings();
   if (id === 'sleep') {const sld=document.getElementById('sl-date');if(sld)sld.value=new Date().toISOString().split('T')[0];renderSleepHistory();}
@@ -2225,12 +2558,37 @@ function navSub(spId, btn, parentId) {
   if (spId === 'sp-meals') buildMeals();
   if (spId === 'sp-supps') buildSupps();
   if (spId === 'sp-hydration') buildHydration();
+  if (spId === 'sp-warmup') { setTimeout(addWarmupYTButtons, 50); }
+  if (spId === 'sp-cooldown') { setTimeout(addCooldownYTButtons, 50); }
   if (spId === 'sp-workout') buildWorkout();
   if (spId === 'sp-history') { renderHistory(); renderSessions(); renderPRs(); }
   if (spId === 'sp-milestones') renderMilestones();
   if (spId === 'sp-body') { renderMeasurements(); renderPhotoLog(); }
 }
-function showWarmup(id,btn){['wu-general','wu-push','wu-pull','wu-legs','wu-cooldown','wu-rest','wu-timer'].forEach(s=>{const el=document.getElementById(s);if(el)el.style.display=s===id?'block':'none';});document.querySelectorAll('#sp-warmup .ptab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function showCooldown(id,btn){['cd-push','cd-pull','cd-legs','cd-shoulder','cd-timer'].forEach(s=>{const el=document.getElementById(s);if(el)el.style.display=s===id?'block':'none';});document.querySelectorAll('#sp-cooldown .ptab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(id!=='cd-timer')setTimeout(addCooldownYTButtons,50);}
+
+let cdSecs=45,cdOrig=45,cdRunning=false,cdInterval=null;
+function cdPad(n){return String(n).padStart(2,'0');}
+function cdUpdateDisplay(){const el=document.getElementById('cd-timer-display');if(el)el.textContent=cdPad(Math.floor(cdSecs/60))+':'+cdPad(cdSecs%60);}
+function cdTimerStart(){if(cdRunning){clearInterval(cdInterval);cdRunning=false;document.getElementById('cd-start-btn').textContent='Start';return;}if(cdSecs<=0)cdSecs=cdOrig;cdRunning=true;document.getElementById('cd-start-btn').textContent='Pause';cdInterval=setInterval(()=>{cdSecs--;cdUpdateDisplay();if(cdSecs<=0){clearInterval(cdInterval);cdRunning=false;document.getElementById('cd-start-btn').textContent='Start';const el=document.getElementById('cd-timer-display');if(el)el.textContent='DONE';if(navigator.vibrate)navigator.vibrate([200,100,200]);}},1000);}
+function cdTimerReset(){clearInterval(cdInterval);cdRunning=false;cdSecs=cdOrig;cdUpdateDisplay();const el=document.getElementById('cd-timer-display');if(el&&el.textContent==='DONE')el.textContent=cdPad(Math.floor(cdSecs/60))+':'+cdPad(cdSecs%60);const btn=document.getElementById('cd-start-btn');if(btn)btn.textContent='Start';}
+function cdSetTimer(s){clearInterval(cdInterval);cdRunning=false;cdSecs=s;cdOrig=s;cdUpdateDisplay();const btn=document.getElementById('cd-start-btn');if(btn)btn.textContent='Start';}
+
+function addCooldownYTButtons() {
+  document.querySelectorAll('#sp-cooldown table td:first-child').forEach(td => {
+    const name = td.textContent.trim();
+    if (!name || td.querySelector('a')) return;
+    const btn = document.createElement('a');
+    btn.href = getMWUrl(name);
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    btn.textContent = '▶ Show';
+    btn.style.cssText = 'display:inline-block;margin-left:.5rem;padding:.15rem .45rem;border-radius:5px;background:var(--bg3);border:1px solid var(--border);font-size:10px;font-weight:600;color:var(--accent);text-decoration:none;vertical-align:middle;';
+    td.appendChild(btn);
+  });
+}
+
+function showWarmup(id,btn){['wu-general','wu-push','wu-pull','wu-legs','wu-rest','wu-timer'].forEach(s=>{const el=document.getElementById(s);if(el)el.style.display=s===id?'block':'none';});document.querySelectorAll('#sp-warmup .ptab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 
 // Warmup timer
 let wuSecs=45,wuOrig=45,wuRunning=false,wuInterval=null;
@@ -2409,6 +2767,434 @@ function toggleInteractions(){
 }
 let toastTimer;
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2500);}
+
+// ── MEAL PLANNER ──────────────────────────────────────────────────────────────
+const SHOPPING = {
+  b1: {
+    protein: [
+      ['Greek yogurt (Oikos Triple Zero or Chobani 0%)', '2.1kg (300g × 7)'],
+      ['Whey isolate — vanilla', '7 scoops'],
+    ],
+    produce: [
+      ['Frozen berries', '700g'],
+    ],
+    pantry: [
+      ['Rolled oats', '210g (30g × 7)'],
+      ['Chia seeds', '7 tsp'],
+      ['Natural almond butter', '7 tbsp'],
+      ['Honey', 'check stock'],
+      ['Cinnamon', 'check stock'],
+    ],
+    frozen: [],
+    dairy: [],
+  },
+  b2: {
+    protein: [
+      ['Lean ground turkey 93/7', '1.05kg (150g × 7)'],
+      ['Liquid egg whites', '1 large carton (~1.05L, 150g × 7)'],
+      ['Fat free cheddar', '~392g (56g × 7)'],
+    ],
+    produce: [
+      ['Avocado', '4 avocados (for crema)'],
+      ['White onion', '1 small onion'],
+      ['Bell peppers', '1 cup finely chopped'],
+    ],
+    pantry: [
+      ['Ole Extreme Wellness 10" wraps', '1 pack (7 wraps)'],
+      ['Refried black beans', '2 pouches'],
+      ['Tomato paste', '1 small can'],
+      ['Chicken broth', '1 carton (small)'],
+      ['Minced garlic', 'check stock'],
+      ['Garlic powder, onion powder, smoked paprika', 'check stock'],
+    ],
+    frozen: [],
+    dairy: [
+      ['Greek yogurt (plain, for crema)', '120g'],
+    ],
+  },
+  b3: {
+    protein: [
+      ['Liquid egg whites', '~1.05L (150g × 7)'],
+      ['Turkey bacon', '14 slices (2 × 7)'],
+      ['Turkey sausage patties', '7 patties'],
+      ['Fat free cheddar', '196g (28g × 7)'],
+    ],
+    produce: [],
+    pantry: [
+      ['Ole Extreme Wellness Carb Balance wraps', '1 pack (7 wraps)'],
+      ['Salt and pepper', 'check stock'],
+    ],
+    frozen: [],
+    dairy: [],
+  },
+  l1: {
+    protein: [
+      ['Chicken breast', '1.54kg (220g cooked × 7)'],
+    ],
+    produce: [
+      ['Baby gold or yellow potatoes', '1.75kg (250g × 7)'],
+      ['Green onions', '1 bunch'],
+      ['Shredded carrots or cucumber (optional)', 'as needed'],
+    ],
+    pantry: [
+      ['Olive oil', 'check stock'],
+      ['Salt, garlic powder, smoked paprika, black pepper', 'check stock'],
+      ['Chili powder', 'check stock'],
+      // Bang Bang Sauce S1 ingredients
+      ['Sweet chili sauce', '1 bottle'],
+      ['Sriracha', '1 bottle'],
+      ['Light mayo', '1 jar'],
+      ['Honey', 'check stock'],
+    ],
+    frozen: [],
+    dairy: [
+      ['Greek yogurt (plain, for Bang Bang sauce)', '840g (120g × 7)'],
+    ],
+  },
+  l2: {
+    protein: [
+      ['Lean 93/7 ground beef', '1.2kg (170g × 7)'],
+    ],
+    produce: [
+      ['Russet potatoes', '840g (120g × 7)'],
+      ['Frozen street corn kernels', '1 bag (~600g)'],
+      ['Pico de gallo', '1 store-bought tub'],
+      ['Light guacamole', '1 store-bought tub'],
+      ['Fresh cilantro', '1 bunch'],
+      ['White onion', '1 onion'],
+    ],
+    pantry: [
+      ['Low-sodium taco seasoning', '2 packets'],
+      ['Beef bone broth', '1 small carton'],
+      ['Beef bouillon', 'check stock'],
+      ['Olive oil spray', 'check stock'],
+      ['Garlic powder, smoked paprika', 'check stock'],
+      // Smoky Chipotle Lime Crema S2 ingredients
+      ['Chipotle peppers in adobo', '1 can'],
+      ['Lime juice', '1 bottle'],
+      ['Honey', 'check stock'],
+    ],
+    frozen: [],
+    dairy: [
+      ['Greek yogurt (plain, for crema)', '840g (120g × 7)'],
+      ['Light mayo (for crema)', '7 tbsp'],
+    ],
+  },
+  l3: {
+    protein: [
+      ['Chicken tenderloins or breast', '1.4kg (200g × 7)'],
+    ],
+    produce: [
+      ['Shredded romaine lettuce', '1 large head or bag'],
+      ['Spring onions', '1 bunch'],
+      ['Fresh cilantro (for S3)', '1/4 cup'],
+    ],
+    pantry: [
+      ['Jasmine rice (dry)', '1.05kg (150g × 7)'],
+      ['Chicken broth', '1 x 900ml carton'],
+      ['Low-sodium soy sauce', '1 bottle'],
+      ['Rice vinegar', '1 bottle'],
+      ['Honey', 'check stock'],
+      ['Sesame oil', '1 bottle'],
+      ['Garlic powder', 'check stock'],
+      ['Ginger paste', '1 jar'],
+    ],
+    frozen: [],
+    dairy: [
+      ['Greek yogurt (plain, for S3 cilantro sauce)', '840g (120g × 7)'],
+      ['Light mayo (for S3)', '7 tbsp'],
+    ],
+  },
+  sn1: {
+    protein: [
+      ['2% cottage cheese (Nordica)', '1.75kg (250g × 7)'],
+      ['Eggs', '14 eggs — hard boil Sunday (2 × 7)'],
+    ],
+    produce: [
+      ['Berries or banana', '~700g'],
+    ],
+    pantry: [
+      ['Chia seeds', '7 tsp'],
+      ['Honey', 'check stock'],
+      ['Cinnamon', 'check stock'],
+    ],
+    frozen: [],
+    dairy: [],
+  },
+  sn2: {
+    protein: [
+      ['Canned tuna', '7 cans (1 per serving)'],
+      ['2% cottage cheese (Nordica)', '1.75kg (250g × 7)'],
+    ],
+    produce: [
+      ['Cucumber', '4 large cucumbers'],
+    ],
+    pantry: [
+      ['Chipotle avocado mayo', '1 jar'],
+      ['Everything bagel seasoning', '1 jar'],
+    ],
+    frozen: [],
+    dairy: [],
+  },
+  sn3: {
+    protein: [
+      ['Greek yogurt OR 2% cottage cheese', '1.75kg (250g × 7)'],
+      ['Whey isolate', '7 scoops'],
+      ['Eggs', '14 eggs — hard boil Sunday (2 × 7)'],
+    ],
+    produce: [],
+    pantry: [],
+    frozen: [],
+    dairy: [],
+  },
+  d1: {
+    protein: [
+      ['Boneless skinless chicken thighs', '1.54kg (220g × 7)'],
+    ],
+    produce: [
+      ['Baby gold or yellow potatoes', '1.75kg (250g × 7)'],
+      ['Garlic', '1 bulb'],
+      ['Fresh parsley', '1 bunch'],
+      ['Lemon', '1 lemon'],
+    ],
+    pantry: [
+      ['Olive oil', 'check stock'],
+      ['Garlic powder, Italian seasoning, paprika', 'check stock'],
+      ['Garlic paste', '1 jar'],
+      ['Light mayo', '1 jar'],
+      ['Parmesan (finely grated)', '~200g'],
+    ],
+    frozen: [],
+    dairy: [
+      ['Greek yogurt (plain, for garlic sauce)', '840g (120g × 7)'],
+    ],
+  },
+  d2: {
+    protein: [
+      ['Lean 93/7 ground beef', '1.54kg (220g × 7) — cook fresh daily'],
+    ],
+    produce: [
+      ['Russet or yellow potatoes', '1.75kg (250g × 7)'],
+      ['Romaine lettuce', '1 large head'],
+      ['White onion', '2 onions'],
+      ['Dill pickles', '1 jar'],
+    ],
+    pantry: [
+      ['Olive oil', 'check stock'],
+      ['Yellow mustard', '1 bottle'],
+      ['Ketchup', '1 bottle'],
+      ['Light mayo', '1 jar'],
+      ['Garlic powder, onion powder, smoked paprika', 'check stock'],
+      ['Reduced-fat American or cheddar cheese (optional)', '4 slices'],
+    ],
+    frozen: [],
+    dairy: [
+      ['Greek yogurt (plain, for Big Mac sauce)', '840g (120g × 7)'],
+    ],
+  },
+  d3: {
+    protein: [
+      ['Lean ground turkey 93/7', '1.4kg (200g × 7)'],
+    ],
+    produce: [
+      ['Sweet potatoes', '1.4kg (200g × 7)'],
+      ['White onion', '1 small onion'],
+      ['Pico de gallo', '1 store-bought tub'],
+      ['Light guacamole', '1 store-bought tub'],
+      ['Fresh cilantro', '1 bunch'],
+      ['Avocado', '3 avocados (for guac)'],
+    ],
+    pantry: [
+      ['Low-sodium taco seasoning', '2 packets'],
+      ['Tomato paste', '1 small can'],
+      ['Chicken broth', '1 small carton'],
+      ['Olive oil spray', 'check stock'],
+      ['Garlic powder, smoked paprika, cinnamon', 'check stock'],
+      // Smoky Chipotle Lime Crema S2
+      ['Chipotle peppers in adobo', '1 can'],
+      ['Lime juice', '1 bottle'],
+      ['Honey', 'check stock'],
+    ],
+    frozen: [],
+    dairy: [
+      ['Greek yogurt (plain, for crema)', '840g (120g × 7)'],
+      ['Light mayo (for crema)', '7 tbsp'],
+    ],
+  },
+  ds1: {
+    protein: [
+      ['2% cottage cheese (Nordica)', '1.75kg (250g × 7)'],
+      ['Chocolate whey isolate', '7 scoops'],
+    ],
+    produce: [],
+    pantry: [
+      ['Dark cocoa powder', 'check stock'],
+      ['Honey', 'check stock'],
+      ['Vanilla extract', 'check stock'],
+    ],
+    frozen: [],
+    dairy: [],
+  },
+  ds2: {
+    protein: [
+      ['Chocolate whey isolate', '7 scoops'],
+      ['Eggs', '7 eggs (1 per serving — make fresh daily)'],
+    ],
+    produce: [],
+    pantry: [
+      ['Dark cocoa powder', 'check stock'],
+      ['Baking powder', 'check stock'],
+    ],
+    frozen: [],
+    dairy: [
+      ['Greek yogurt (plain)', '~220g (2 tbsp × 7)'],
+    ],
+  },
+  ds3: {
+    protein: [
+      ['Chocolate whey isolate', '7 scoops'],
+    ],
+    produce: [],
+    pantry: [
+      ['Chia seeds', '~130g (3 tbsp × 7)'],
+      ['Dark cocoa powder', 'check stock'],
+      ['Honey', 'check stock'],
+      ['Unsweetened almond milk', '1.75L (250ml × 7)'],
+    ],
+    frozen: [],
+    dairy: [],
+  },
+};
+
+// Always needed regardless of meals
+const STAPLES = {
+  protein: [
+    ['Whey isolate — for post-workout shake', '7 scoops (already stocked)'],
+    ['Creatine monohydrate', 'check stock — 5g/day'],
+  ],
+  pantry: [
+    ['Olive oil / avocado oil spray', 'check stock'],
+    ['Salt, black pepper', 'check stock'],
+    ['Garlic powder, onion powder, smoked paprika', 'check stock'],
+    ['Dark cocoa powder', 'check stock'],
+    ['Honey', 'check stock'],
+    ['Psyllium husk powder', 'check stock — 1 tsp/day'],
+  ],
+  dairy: [
+    ['Unsweetened almond milk — for coffee', 'check stock'],
+    ['Greek yogurt (plain, non-fat)', 'shared across sauces — buy 1-2 large tubs'],
+  ],
+};
+
+function generateShoppingList() {
+  const b = document.getElementById('pl-breakfast').value;
+  const l = document.getElementById('pl-lunch').value;
+  const sn = document.getElementById('pl-snack').value;
+  const d = document.getElementById('pl-dinner').value;
+  const ds = document.getElementById('pl-dessert').value;
+
+  // Merge all shopping items by category
+  const categories = {
+    '🥩 Protein': {},
+    '🥦 Produce': {},
+    '🥛 Dairy': {},
+    '🥫 Pantry': {},
+    '❄️ Frozen': {},
+    '✅ Staples (always check)': {},
+  };
+
+  const meals = [
+    SHOPPING[b],
+    SHOPPING[l],
+    SHOPPING[sn],
+    SHOPPING[d],
+    SHOPPING[ds],
+  ];
+
+  meals.forEach(m => {
+    m.protein.forEach(([item, qty]) => { categories['🥩 Protein'][item] = qty; });
+    m.produce.forEach(([item, qty]) => { categories['🥦 Produce'][item] = qty; });
+    m.dairy.forEach(([item, qty]) => { categories['🥛 Dairy'][item] = qty; });
+    m.pantry.forEach(([item, qty]) => { categories['🥫 Pantry'][item] = qty; });
+    m.frozen.forEach(([item, qty]) => { categories['❄️ Frozen'][item] = qty; });
+  });
+
+  STAPLES.protein.forEach(([item, qty]) => { categories['✅ Staples (always check)'][item] = qty; });
+  STAPLES.dairy.forEach(([item, qty]) => { categories['✅ Staples (always check)'][item] = qty; });
+  STAPLES.pantry.forEach(([item, qty]) => { categories['✅ Staples (always check)'][item] = qty; });
+
+  // Build HTML
+  let html = '';
+  let plainText = '🛒 SHOPPING LIST\n\n';
+
+  Object.entries(categories).forEach(([cat, items]) => {
+    const entries = Object.entries(items);
+    if (entries.length === 0) return;
+    html += `<div style="margin-bottom:1rem;">`;
+    html += `<div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);padding:.4rem 0;border-bottom:1px solid var(--border);margin-bottom:.5rem;">${cat}</div>`;
+    plainText += `${cat}\n`;
+    entries.forEach(([item, qty]) => {
+      html += `<div style="display:flex;justify-content:space-between;align-items:baseline;padding:.3rem 0;border-bottom:1px solid var(--border);gap:.5rem;">`;
+      html += `<span style="font-size:14px;color:var(--text)">${item}</span>`;
+      html += `<span style="font-size:12px;color:var(--muted);text-align:right;flex-shrink:0;max-width:50%">${qty}</span>`;
+      html += `</div>`;
+      plainText += `• ${item} — ${qty}\n`;
+    });
+    html += `</div>`;
+    plainText += '\n';
+  });
+
+  document.getElementById('pl-list-content').innerHTML = html;
+  window._plShoppingText = plainText;
+
+  // Summary
+  const mealMap = {
+    b1:{name:'B1 — Greek Yogurt Power Bowl',protein:55,cals:520},
+    b2:{name:'B2 — Turkey Breakfast Burrito',protein:61,cals:530},
+    b3:{name:'B3 — AM Meatzilla Burrito',protein:52,cals:380},
+    l1:{name:'L1 — Bang Bang Chicken Potato Bowl',protein:58,cals:590},
+    l2:{name:'L2 — Loaded Taco Street Corn Bowl',protein:60,cals:620},
+    l3:{name:'L3 — Kogi Chicken Rice Bowl',protein:58,cals:580},
+    sn1:{name:'SN1 — Cottage Cheese + Fruit',protein:40,cals:380},
+    sn2:{name:'SN2 — Tuna Cucumber Boats',protein:43,cals:400},
+    sn3:{name:'SN3 — Yogurt + Whey + Eggs',protein:52,cals:345},
+    d1:{name:'D1 — Garlic Parmesan Chicken',protein:62,cals:590},
+    d2:{name:'D2 — Big Mac Smash Burger Bowl',protein:58,cals:600},
+    d3:{name:'D3 — Sweet Potato Turkey Bowl',protein:58,cals:600},
+    ds1:{name:'DS1 — Cottage Cheese Mousse',protein:35,cals:280},
+    ds2:{name:'DS2 — Protein Mug Cake',protein:35,cals:320},
+    ds3:{name:'DS3 — Protein Pudding',protein:33,cals:320},
+  };
+
+  const bm = mealMap[b], lm = mealMap[l], sm = mealMap[sn], dm = mealMap[d], dsm = mealMap[ds];
+  const dailyProtein = bm.protein + lm.protein + sm.protein + dm.protein + dsm.protein;
+  const dailyCals = bm.cals + lm.cals + sm.cals + dm.cals + dsm.cals;
+
+  document.getElementById('pl-summary').innerHTML = `
+    <table class="micro-table">
+      <tr><th>Category</th><th>Meal</th><th>Protein</th><th>Cals</th></tr>
+      <tr><td>🍳 Breakfast</td><td style="font-size:12px">${bm.name}</td><td>${bm.protein}g</td><td>${bm.cals}</td></tr>
+      <tr><td>🥗 Lunch</td><td style="font-size:12px">${lm.name}</td><td>${lm.protein}g</td><td>${lm.cals}</td></tr>
+      <tr><td>🍎 Snack</td><td style="font-size:12px">${sm.name}</td><td>${sm.protein}g</td><td>${sm.cals}</td></tr>
+      <tr><td>🍽️ Dinner</td><td style="font-size:12px">${dm.name}</td><td>${dm.protein}g</td><td>${dm.cals}</td></tr>
+      <tr><td>🍫 Dessert</td><td style="font-size:12px">${dsm.name}</td><td>${dsm.protein}g</td><td>${dsm.cals}</td></tr>
+      <tr style="font-weight:700;background:var(--bg3)"><td colspan="2">Daily Total</td><td style="color:var(--accent)">${dailyProtein}g</td><td>${dailyCals}</td></tr>
+    </table>
+  `;
+
+  document.getElementById('pl-result').style.display = 'block';
+  document.getElementById('pl-result').scrollIntoView({behavior:'smooth'});
+}
+
+function copyShoppingList() {
+  if (window._plShoppingText) {
+    navigator.clipboard.writeText(window._plShoppingText).then(() => {
+      const btn = event.target;
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => btn.textContent = '📋 Copy', 2000);
+    });
+  }
+}
 
 window.addEventListener('load',()=>{initTheme();init();});
 window.addEventListener('resize',()=>{const p=document.getElementById('panel-main');if(p&&p.classList.contains('active'))drawChart();});
